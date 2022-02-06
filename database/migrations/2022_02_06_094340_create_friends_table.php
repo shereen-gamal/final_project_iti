@@ -19,6 +19,11 @@ class CreateFriendsTable extends Migration
             $table->foreignId('user_id')
             ->nullable()
             ->constrained();
+            
+            $table->foreignId('friend_id')
+            ->nullable()
+            ->constrained()
+            ->references('id')->on('users');
 
         });
     }
