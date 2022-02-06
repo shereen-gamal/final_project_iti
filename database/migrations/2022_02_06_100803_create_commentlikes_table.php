@@ -16,7 +16,8 @@ class CreateCommentlikesTable extends Migration
         Schema::create('commentlikes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->nullable();
-            $table->foreignId('comment_id')->constrained()->nullable();
+            $table->foreignId('comment_id')->constrained()->references('id')->on('comment')
+            ->nullable();
         });
     }
 
