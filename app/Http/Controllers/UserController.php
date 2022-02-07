@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -11,54 +12,46 @@ class UserController extends Controller
 {
 
 
-    
-    public function Login(Request $request){
+
+    public function Login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
         return $user->createToken($request->device_name)->plainTextToken;
     }
-
-
-    public function update($UserId,Request $data){
-        $oneUser=User::findOrFail($UserId);
+    public function update($UserId, Request $data)
+    {
+        $oneUser = User::findOrFail($UserId);
         $oneUser->update(
             $data->all()
         );
         return $oneUser;
     }
-
-
     public function index()
     {
-
         $allusers = user::all();
-
         return $allusers;
     }
-
     public function show($userId)
     {
         $oneUser = user::find($userId);
         return  $oneUser;
     }
-    
     public function destroy($userId)
     {
         $oneUser = user::findOrFail($userId);
         $oneUser->delete();
         return  $oneUser;
     }
-
-
     public function store()
     {
         $data = request()->all();
