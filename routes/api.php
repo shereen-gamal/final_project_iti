@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\User;
 
 
@@ -39,3 +40,6 @@ Route::post('/users', [UserController::class,'store']);
 
 Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index');
 Route::get('posts/{post}',[postController::class,'show']);
+Route::post('/posts',[PostController::class,'store']);
+Route::put('/posts/{post}',[PostController::class,'update']);
+Route::delete('/posts/{post}',[PostController::class,'destory']);

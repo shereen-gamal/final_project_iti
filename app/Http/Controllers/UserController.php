@@ -11,6 +11,7 @@ class UserController extends Controller
 
 
     public function update($UserId,Request $data){
+        dd($data->all());
         $oneUser=User::findOrFail($UserId);
         // dd($oneUser);
         $oneUser->update(
