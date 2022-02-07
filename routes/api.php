@@ -7,8 +7,6 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,33 +22,15 @@ use Illuminate\Support\Facades\Hash;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::put('/users/{user}',[UserController::class, 'update']);
-Route::get('/users',[UserController::class,'index']);
-Route::get('/users/{user}',[UserController::class,'show']);
-Route::delete('/users/{user}',[Usercontroller::class,'destroy']);
-Route::post('/users', [UserController::class,'store']);
-
-Route::post('/user/token', function (Request $request) {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-        'device_name' => 'required',
-    ]);
-    $user = User::where('email', $request->email)->first();
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-    return $user->createToken($request->device_name)->plainTextToken;
-});
-
-
-
-Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index');
-Route::get('posts/{post}',[postController::class,'show']);
-Route::post('/posts',[PostController::class,'store']);
-Route::put('/posts/{post}',[PostController::class,'update']);
-Route::delete('/posts/{post}',[PostController::class,'destory']);
+Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
+Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
+Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum');
+Route::get('/users/{user}',[UserController::class,'show'])->middleware('auth:sanctum');
+Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
+Route::post('/users', [UserController::class,'store'])->middleware('auth:sanctum');
+Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index')->middleware('auth:sanctum');
+Route::get('posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
+Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
+Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
+Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
 
