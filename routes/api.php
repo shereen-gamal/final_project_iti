@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\User;
 
 
@@ -29,3 +30,8 @@ Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy']);
 Route::post('/users', [UserController::class,'store']);
+
+
+Route::post('/posts',[PostController::class,'store']);
+Route::put('/posts/{post}',[PostController::class,'update']);
+Route::delete('/posts/{post}',[PostController::class,'destory']);
