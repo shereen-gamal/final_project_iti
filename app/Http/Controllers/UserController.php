@@ -8,17 +8,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
-    public function update($UserId, Request $data)
-    {
-        $oneUser = User::findOrFail($UserId);
-        // dd($oneUser);
+    public function update($UserId,Request $data){
+        $oneUser=User::findOrFail($UserId);
         $oneUser->update(
             $data->all()
         );
         return $oneUser;
     }
+
 
     public function index()
     {
