@@ -19,7 +19,6 @@ class UserController extends Controller
         return $oneUser;
         }
 
-
     public function index()
     {
 
