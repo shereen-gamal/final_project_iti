@@ -7,7 +7,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  
+
+
+    public function update($UserId,Request $data){
+        $oneUser=User::findOrFail($UserId);
+        // dd($oneUser);
+        $oneUser->update(
+      $data->all()
+
+       );
+        return $oneUser;
+        }
 
     public function index()
     {
@@ -54,4 +64,5 @@ class UserController extends Controller
         ]);
         return $user;
     }
+
 }
