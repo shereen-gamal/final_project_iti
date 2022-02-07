@@ -22,14 +22,20 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-<<<<<<< HEAD
+
+
+
+
+
+
+
+
 Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
-=======
-
-
-
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy']);
 Route::post('/users', [UserController::class,'store']);
->>>>>>> ae1de17deadc2d68746673d57a3150229dde4a84
+
+
+Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index');
+Route::get('posts/{post}',[postController::class,'show']);
