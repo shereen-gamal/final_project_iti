@@ -66,8 +66,8 @@ class UserController extends Controller
             //************* */
             'name' => $data['firstname'] . " " . $data['lastname'],
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
-            'school' => 'cairo school',
-            'address' => 'my address',
+            'school' => isset($data['school']) ? $data['school'] :'cairo school',
+            'address' => isset($data['address']) ? $data['address'] :'my address',
             'profilePic' => 'image',
             'mobile' => '01234567891',
             'location' => 'my location',
