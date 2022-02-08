@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 
 use App\Models\User;
@@ -31,9 +32,17 @@ Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('au
 Route::post('/users', [UserController::class,'store']);
 
 //post Routes
-Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index')->middleware('auth:sanctum');
-Route::get('posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
+Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index')->middleware('auth:sanctum');
+Route::get('/posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
+
+//comment Routes
+Route::get('/comments',[CommentController::class,'index']);
+Route::get('/comments/{comment}',[CommentController::class,'show']);
+Route::post('/comments',[CommentController::class,'store']);
+Route::put('/comments/{comment}',[CommentController::class ,'update']);
+Route::delete('/comments/{comment}',[CommentController::class ,'destory']);
+
 
