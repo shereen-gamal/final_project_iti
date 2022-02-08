@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\PhotoController;
 use App\Models\User;
-
+use App\Models\Photo;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +33,13 @@ Route::post('/users', [UserController::class,'store']);
 //post Routes
 Route::get('posts',[postController::class,'index'])->name('APi'.' api.posts.index')->middleware('auth:sanctum');
 Route::get('posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
-Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
+Route::post('/posts',[PostController::class,'store']);
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
 
+// photo Routes
+Route::get('photos',[photoController::class,'index'])->name('APi'.' api.photos.index');
+Route::get('photos/{photo}',[photoController::class,'show']);
+Route::post('/photos',[photoController::class,'store']);
+Route::put('/photos/{photo}',[photoController::class,'update']);
+Route::delete('/photos/{photo}',[photoController::class,'destory']);
