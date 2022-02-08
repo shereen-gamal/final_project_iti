@@ -1,26 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Photo;
 
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {
-  
     public function index()
     {
-
         $allphotos=Photo::all();
- 
-        return $allphotos;    
+        return $allphotos;
     }
-
-    public function show($photoId){
+    public function show($photoId)
+    {
         $onephoto= Photo::find($photoId);
-        return  $onephoto;
+        return $onephoto;
     }
-
-    public function store(){
+    public function store()
+    {
         $data =request()->all();
         $photo=Photo::create([
             'image'=>$data['image'],
@@ -28,7 +26,6 @@ class PhotoController extends Controller
         ]);
         return $photo ;
     }
-
 
     public function update($id,Request $data){
         $photo =Photo::find($id);
@@ -39,7 +36,6 @@ class PhotoController extends Controller
     public function destory($id){
         $photo = Photo::findOrFail($id);
         $photo->delete();
-        return  $photo;
+        return $photo;
     }
-
 }
