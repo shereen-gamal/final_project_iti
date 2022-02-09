@@ -22,14 +22,15 @@ class User extends Authenticatable
         'password',
         'firstname',
         'lasttname',
-        'date_of_birth', 	
+        'date_of_birth',
         'gender',
-        'isAdmin' ,	
+        'isAdmin' ,
         'school',
         'address',
         'profilePic',
         'mobile',
         'location',
+        'userid'
     ];
 
     /**
@@ -40,6 +41,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'userid'
     ];
 
     /**

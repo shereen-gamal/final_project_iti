@@ -64,14 +64,42 @@ class UserController extends Controller
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
             //************* */
+            'userid' => uniqid(),
             'name' => $data['firstname'] . " " . $data['lastname'],
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
-            'school' => 'cairo school',
-            'address' => 'my address',
+            'school' => isset($data['school']) ? $data['school'] :'cairo school',
+            'address' => isset($data['address']) ? $data['address'] :'my address',
             'profilePic' => 'image',
             'mobile' => '01234567891',
             'location' => 'my location',
         ]);
+        return $user;
+    }
+    public function getUserId(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+        return $user->userid;
+    }
+    public function getUserByUserId(Request $request)
+    {
+        $request->validate([
+            'userid' => 'required'
+        ]);
+        $user = User::where('userid', $request->userid)->first();
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'userid' => ['The provided credentials are incorrect.'],
+            ]);
+        }
         return $user;
     }
 }
