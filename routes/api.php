@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentlikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
 use App\Models\User;
 use App\Models\Photo;
+use App\Models\Commentlike;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //user Routes
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
-Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum');
+Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show'])->middleware('auth:sanctum');
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
@@ -54,3 +56,9 @@ Route::post('/photos',[PhotoController::class,'store']);
 Route::put('/photos/{photo}',[PhotoController::class ,'update']);
 Route::delete('/photos/{photo}',[PhotoController::class ,'destory']);
 
+//commentlike Routes
+Route::get('/commentslike',[CommentlikeController ::class,'index']);
+Route::get('/commentslike/{commentlike}',[CommentlikeController ::class,'show']);
+Route::post('/commentslike',[CommentlikeController ::class,'store']);
+Route::put('/commentslike/{commentlike}',[CommentlikeController ::class ,'update']);
+Route::delete('/commentslike/{commentlike}',[CommentlikeController ::class ,'destory']);
