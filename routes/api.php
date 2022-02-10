@@ -3,9 +3,9 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
-
+use App\Http\Controllers\CommentLikeController ;
 use App\Models\User;
-
+use App\Models\CommentLike;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,4 +54,8 @@ Route::get('/photos/{photo}',[PhotoController::class,'show']);
 Route::post('/photos',[PhotoController::class,'store']);
 Route::put('/photos/{photo}',[PhotoController::class ,'update']);
 Route::delete('/photos/{photo}',[PhotoController::class ,'destory']);
-
+//commentslike Routes
+Route::get('/commentslike',[CommentLikeController ::class,'index']);
+Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
+Route::post('/commentslike',[CommentLikeController ::class,'store']);
+Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
