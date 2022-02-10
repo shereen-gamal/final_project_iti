@@ -9,36 +9,40 @@ class PostController extends Controller
 {
     public function index()
     {
-
-        $allposts=Post::all();
-        return $allposts;    
+        $allposts = Post::with('photos','comments','user')->get();
+        //    $allposts=Post::all();
+        return $allposts;
     }
 
-    public function show($postId){
-        $onepost= Post::find($postId);
-      //  dd($onepost->photos);
+    public function show($postId)
+    {
+        //   $onepost= Post::find($postId);
+        $onepost = Post::with('photos','comments','user')->get()->where('id', $postId);
+        //  dd($onepost->photos);
         return $onepost;
     }
 
-    public function store(){
-        $data =request()->all();
-        $post=Post::create([
-            'content'=>$data['content'],
-            'user_id'=>$data['user_id'],
+    public function store()
+    {
+        $data = request()->all();
+        $post = Post::create([
+            'content' => $data['content'],
+            'user_id' => $data['user_id'],
         ]);
-        return $post ;
+        return $post;
     }
 
-    public function update($id,Request $data){
-        $post =Post::find($id);
+    public function update($id, Request $data)
+    {
+        $post = Post::find($id);
         $post->update($data->all());
         return $post;
     }
 
-    public function destory($id){
+    public function destory($id)
+    {
         $post = Post::findOrFail($id);
         $post->delete();
         return $post;
     }
-
 }

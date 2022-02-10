@@ -10,8 +10,18 @@ class Post extends Model
     use HasFactory;
     public  function photos()
     {
-        return $this->hasMany(Photo::class);
+        return $this->hasMany(Photo::class,'post_id','id');
     }
+    public  function comments()
+    {
+        return $this->hasMany(Comment::class,'post_id','id' );
+    }
+
+    public  function shares()
+    {
+        return $this->hasMany(share::class,'post_id','id' );
+    }
+
     protected $fillable =[
         'content',
         'user_id',
