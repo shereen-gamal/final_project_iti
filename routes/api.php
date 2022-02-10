@@ -37,7 +37,7 @@ Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middlewa
 
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
-Route::get('/posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
+Route::get('/posts/{post}',[postController::class,'show']);
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');

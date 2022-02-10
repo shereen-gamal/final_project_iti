@@ -11,12 +11,12 @@ class PostController extends Controller
     {
 
         $allposts=Post::all();
- 
         return $allposts;    
     }
 
     public function show($postId){
         $onepost= Post::find($postId);
+      //  dd($onepost->photos);
         return $onepost;
     }
 

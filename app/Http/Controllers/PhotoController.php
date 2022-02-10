@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 class PhotoController extends Controller
 {
     public function index()
-    {
+    { 
         $allphotos=Photo::all();
+
         return $allphotos;
     }
     public function show($photoId)
     {
         $onephoto= Photo::find($photoId);
+        dd($onephoto->post);
         return $onephoto;
     }
     public function store()
