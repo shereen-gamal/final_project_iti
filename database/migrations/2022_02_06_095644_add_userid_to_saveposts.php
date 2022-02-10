@@ -13,7 +13,7 @@ class AddUseridToSaveposts extends Migration
      */
     public function up()
     {
-        Schema::table('saveposts', function (Blueprint $table) {
+        Schema::table('save_posts', function (Blueprint $table) {
             $table->foreignId('user_id')
             ->nullable()
             ->constrained();

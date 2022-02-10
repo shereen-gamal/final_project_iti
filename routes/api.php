@@ -3,9 +3,13 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
+<<<<<<< HEAD
 use App\Http\Controllers\GroupController;
+=======
+use App\Http\Controllers\CommentLikeController ;
+>>>>>>> 2a6407301c4f223aa280a3a7d1f6a02209a2fa6b
 use App\Models\User;
-
+use App\Models\CommentLike;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,11 +35,13 @@ Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum')
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
+
 Route::post('/user/id', [UserController::class,'getUserId']);
 Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middleware('auth:sanctum');
+
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
-Route::get('/posts/{post}',[postController::class,'show'])->middleware('auth:sanctum');
+Route::get('/posts/{post}',[postController::class,'show']);
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
@@ -51,6 +57,7 @@ Route::get('/photos/{photo}',[PhotoController::class,'show']);
 Route::post('/photos',[PhotoController::class,'store']);
 Route::put('/photos/{photo}',[PhotoController::class ,'update']);
 Route::delete('/photos/{photo}',[PhotoController::class ,'destory']);
+<<<<<<< HEAD
 //group Routes
 Route::get('/groups',[GroupController::class,'index']);
 Route::get('/groups/{group}',[GroupController::class,'show']);
@@ -58,3 +65,10 @@ Route::post('/groups',[GroupController::class,'store']);
 Route::put('/groups/{group}',[GroupController::class ,'update']);
 Route::delete('/groups/{group}',[GroupController::class ,'destory']);
 
+=======
+//commentslike Routes
+Route::get('/commentslike',[CommentLikeController ::class,'index']);
+Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
+Route::post('/commentslike',[CommentLikeController ::class,'store']);
+Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
+>>>>>>> 2a6407301c4f223aa280a3a7d1f6a02209a2fa6b

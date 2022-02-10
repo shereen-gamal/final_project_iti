@@ -13,7 +13,7 @@ class Saveposts extends Migration
      */
     public function up()
     {
-        Schema::create('saveposts', function (Blueprint $table) {
+        Schema::create('save_posts', function (Blueprint $table) {
             $table->id();
             $table->string('content');
         });

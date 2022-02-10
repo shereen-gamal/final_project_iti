@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    public  function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+    public  function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     use HasFactory;
     protected $fillable =[
         'content',
@@ -15,4 +24,9 @@ class Comment extends Model
     ];
 
     //relations here
+
+    public function like(){
+        return $this->hasMany(CommentLike::class);
+    }
+
 }
