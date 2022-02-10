@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allposts = Post::with('photos','comments','user')->get();
+        $allposts = Post::with('photos','comments','shares','postLikes','user')->get();
         //    $allposts=Post::all();
         return $allposts;
     }
@@ -17,7 +17,7 @@ class PostController extends Controller
     public function show($postId)
     {
         //   $onepost= Post::find($postId);
-        $onepost = Post::with('photos','comments','user')->get()->where('id', $postId);
+        $onepost = Post::with('photos','comments','shares','postLikes','user')->get()->where('id', $postId);
         //  dd($onepost->photos);
         return $onepost;
     }
