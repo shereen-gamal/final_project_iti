@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
-
     public function Login(Request $request)
     {
         $request->validate([
@@ -28,6 +25,8 @@ class UserController extends Controller
         }
         return $user->createToken($request->device_name)->plainTextToken;
     }
+
+
     public function update($UserId, Request $data)
     {
         $oneUser = User::findOrFail($UserId);
@@ -36,22 +35,30 @@ class UserController extends Controller
         );
         return $oneUser;
     }
+
+
     public function index()
     {
-        $allusers = user::all();
+        $allusers = user::with('posts','friends')->get();
         return $allusers;
     }
+
+
     public function show($userId)
     {
-        $oneUser = user::find($userId);
-        return  $oneUser;
+        $user =User::with('posts','friends')->get()->where('id',$userId);
+        return  $user;
     }
+
+
     public function destroy($userId)
     {
         $oneUser = user::findOrFail($userId);
         $oneUser->delete();
         return  $oneUser;
     }
+
+
     public function store()
     {
         $data = request()->all();
@@ -75,6 +82,8 @@ class UserController extends Controller
         ]);
         return $user;
     }
+
+
     public function getUserId(Request $request)
     {
         $request->validate([
@@ -89,6 +98,8 @@ class UserController extends Controller
         }
         return $user->userid;
     }
+
+
     public function getUserByUserId(Request $request)
     {
         $request->validate([
@@ -102,4 +113,6 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    
 }
