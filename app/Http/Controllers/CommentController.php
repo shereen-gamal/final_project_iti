@@ -8,14 +8,15 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::all();
+        $comments = Comment::with('likes')->get();
         return $comments;
     }
 
-    public function show($id){
-        $comment = Comment::find($id);
+    public function show($comment_id){
+        $comment = Comment::with('likes')->get()->where('id',$comment_id);
         return $comment;
     }
+
 
     public function store(){
         $data = request()->all();
