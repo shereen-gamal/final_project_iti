@@ -13,7 +13,7 @@ class CreateSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('_shares', function (Blueprint $table) {
+        Schema::create('shares', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             

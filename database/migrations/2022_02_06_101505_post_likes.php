@@ -13,7 +13,7 @@ class PostLikes extends Migration
      */
     public function up()
     {
-        Schema::create('postLikes', function (Blueprint $table) {
+        Schema::create('post_likes', function (Blueprint $table) {
             $table->id();
         });
     }
