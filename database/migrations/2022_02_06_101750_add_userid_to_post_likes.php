@@ -13,7 +13,7 @@ class AddUseridToPostLikes extends Migration
      */
     public function up()
     {
-        Schema::table('postLikes', function (Blueprint $table) {
+        Schema::table('post_likes', function (Blueprint $table) {
             $table->foreignId('post_id')
             ->nullable()
             ->constrained();

@@ -13,7 +13,7 @@ class CreateCommentlikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentlikes', function (Blueprint $table) {
+        Schema::create('comment_likes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->nullable();
