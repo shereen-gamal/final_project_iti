@@ -33,6 +33,16 @@ class User extends Authenticatable
         'userid'
     ];
 
+
+    public function friends()
+    {
+        return $this->hasMany(Friend::class,'user_id','id');
+    }
+
+    public function posts(){
+        return $this->hasMany( Post::class ,'user_id','id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
