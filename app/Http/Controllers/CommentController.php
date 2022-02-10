@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::all();
+        $comments = Comment::with('user')->get();
         return $comments;
     }
 
     public function show($id){
-        $comment = Comment::find($id);
+        $comment = Comment::with('user')->get()->where('id',$id);
         return $comment;
     }
 
