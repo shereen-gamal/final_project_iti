@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
 Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum');
-Route::get('/users/{user}',[UserController::class,'show'])->middleware('auth:sanctum');
+Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
