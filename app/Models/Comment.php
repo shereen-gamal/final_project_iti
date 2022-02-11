@@ -23,5 +23,11 @@ class Comment extends Model
         'post_id',
     ];
 
+
     //relations here
+
+    public function likes(){
+        return $this->hasMany(CommentLike::class);
+    }
+
 }
