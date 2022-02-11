@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\PostResource;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -11,15 +12,15 @@ class PostController extends Controller
     {
         $allposts = Post::with('photos','comments','shares','postLikes','user')->get();
         //    $allposts=Post::all();
-        return $allposts;
+        return PostResource::collection($allposts);    
     }
 
     public function show($postId)
     {
-        //   $onepost= Post::find($postId);
-        $onepost = Post::with('photos','comments','shares','postLikes','user')->get()->where('id', $postId);
+        //$onepost= Post::find($postId);
+        $onepost = Post::with('photos','comments','shares','postLikes','user')->get()->find($postId);
         //  dd($onepost->photos);
-        return $onepost;
+        return new PostResource($onepost);
     }
 
     public function store()

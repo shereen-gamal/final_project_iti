@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Resources\CommentResource;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -8,13 +9,15 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::with('likes')->get();
-        return $comments;
+
+        $comments = Comment::with('user','post')->get();
+        return  CommentResource::collection($comments);
     }
 
-    public function show($comment_id){
-        $comment = Comment::with('likes')->get()->where('id',$comment_id);
-        return $comment;
+    public function show($id){
+        $comment = Comment::with('user','post')->get()->find($id);
+        return new CommentResource($comment);
+
     }
 
 
