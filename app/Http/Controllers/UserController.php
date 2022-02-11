@@ -39,16 +39,16 @@ class UserController extends Controller
 
     public function index()
     {
-        $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','groups','pageLikes')->get();
+        // $allusers = user::with('posts','friends','savedposts')->get();
+        $allusers = user::with('posts','friends','friend','groups','pageLikes')->get();
         return $allusers;
     }
 
 
     public function show($userId)
     {
-        $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts','friends','groups','pageLikes')->get()->where('id',$userId);
+        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
+        $user =User::with('posts','friends','friend','groups','pageLikes')->get()->where('id',$userId);
         return  $user;
     }
 

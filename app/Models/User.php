@@ -33,12 +33,19 @@ class User extends Authenticatable
         'userid'
     ];
 
-
+    //many to many self relation
     public function friends()
     {
-        return $this->hasMany(Friend::class,'user_id','id');
+        return $this->belongsToMany(User::class,'friends','user_id','friend_id');
     }
 
+    public function friend()
+    {
+        return $this->belongsToMany(User::class,'friends','friend_id','user_id');
+    }
+
+
+    //one to many
     // public function friendsFriend()
     // {
     //     return $this->hasMany(Friend::class,'friend_id','id');
@@ -49,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function savedposts(){
-        return $this->hasMany(Savepost ::class ,'user_id','id');
+        return $this->hasMany(Savepost::class ,'user_id','id');
     }
 
     public function groups(){

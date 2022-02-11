@@ -1,19 +1,12 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-// use App\Http\Controllers\CommentlikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
->>>>>>> ea0194393495be897aec75a1b0ba2ddaff678485
 use App\Models\User;
 use App\Models\Photo;
-// use App\Models\Commentlike;
-use App\Http\Controllers\CommentLikeController ;
-// use App\Models\User;
 use App\Models\CommentLike;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -37,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //user Routes
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
-Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum');
+Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
