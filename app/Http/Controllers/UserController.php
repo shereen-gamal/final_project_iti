@@ -39,14 +39,14 @@ class UserController extends Controller
 
     public function index()
     {
-        $allusers = user::with('posts','friends')->get();
+        $allusers = user::with('posts.comments.user','friends.user')->get();
         return $allusers;
     }
 
 
     public function show($userId)
     {
-        $user =User::with('posts','friends')->get()->where('id',$userId);
+        $user =User::with('posts.comments.user','friends.user')->get()->where('id',$userId);
         return  $user;
     }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
         $user = User::create([
             //only data from form
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' =>Hash::make($data['password']),
             'firstname' => $data['firstname'],
             'lasttname' => $data['lastname'],
             'date_of_birth' => $data['date_of_birth'],
