@@ -40,7 +40,7 @@ class UserController extends Controller
     public function index()
     {
         // $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','friend','groups','pageLikes')->get();
+        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats','chat')->get();
         return $allusers;
     }
 
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function show($userId)
     {
         // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes')->get()->where('id',$userId)->first();
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats')->get()->where('id',$userId)->first();
         return  $user;
     }
 
