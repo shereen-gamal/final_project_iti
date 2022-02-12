@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
+
         $comments = Comment::with('user','post')->get();
         return  CommentResource::collection($comments);
     }
@@ -16,7 +17,9 @@ class CommentController extends Controller
     public function show($id){
         $comment = Comment::with('user','post')->get()->find($id);
         return new CommentResource($comment);
+
     }
+
 
     public function store(){
         $data = request()->all();

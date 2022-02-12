@@ -33,15 +33,40 @@ class User extends Authenticatable
         'userid'
     ];
 
-
+    //many to many self relation
     public function friends()
     {
-        return $this->hasMany(Friend::class,'user_id','id');
+        return $this->belongsToMany(User::class,'friends','user_id','friend_id');
     }
+
+    public function friend()
+    {
+        return $this->belongsToMany(User::class,'friends','friend_id','user_id');
+    }
+
+
+    //one to many
+    // public function friendsFriend()
+    // {
+    //     return $this->hasMany(Friend::class,'friend_id','id');
+    // }
 
     public function posts(){
         return $this->hasMany( Post::class ,'user_id','id');
     }
+
+    public function savedposts(){
+        return $this->hasMany(Savepost::class ,'user_id','id');
+    }
+
+    public function groups(){
+        return $this->belongsToMany( Group::class,'groups_users');
+    }
+
+    public function pageLikes(){
+        return $this->hasMany(PagesLike::class,'user_id','id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
