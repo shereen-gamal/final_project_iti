@@ -15,7 +15,7 @@ use App\Models\Photo;
 use App\Models\CommentLike;
 use App\Models\postLike;
 
-use App\Events\Message;
+use App\Events\MessageEvent;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -93,6 +93,6 @@ Route::post('/messages',[MessageController ::class,'store']);
 Route::delete('/messages/{message}',[MessageController ::class ,'destory']);
 
 Route::post('/send-message',function(Request $data){
-    event(new Message('from vs'));
+    event(new MessageEvent('from vs'));
 });
 
