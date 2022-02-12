@@ -48,7 +48,7 @@ class UserController extends Controller
     public function show($userId)
     {
         // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts','friends','friend','groups','pageLikes')->get()->where('id',$userId);
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes')->get()->where('id',$userId)->first();
         return  $user;
     }
 
