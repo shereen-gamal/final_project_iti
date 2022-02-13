@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SavePost;
 
-class SavepostController extends Controller
+class SavePostController extends Controller
 {
    
     
