@@ -12,7 +12,7 @@ use App\Http\Controllers\ChatController ;
 use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
-
+use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 
@@ -80,11 +80,11 @@ Route::post('/commentslike',[CommentLikeController ::class,'store']);
 Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
 
 //savepostslike Routes
-Route::get('/saveposts',[SavepostController::class,'index']);
-Route::get('/saveposts/{savepost}',[SavepostController ::class,'show']);
-Route::post('/saveposts',[SavepostController::class,'store']);
-Route::put('/saveposts/{savepost}',[SavepostController::class ,'update']);
-Route::delete('/saveposts/{savepost}',[SavepostController::class ,'destory']);
+Route::get('/saveposts',[SavePostController::class,'index']);
+Route::get('/saveposts/{savepost}',[SavePostController ::class,'show']);
+Route::post('/saveposts',[SavePostController::class,'store']);
+Route::put('/saveposts/{savepost}',[SavePostController::class ,'update']);
+Route::delete('/saveposts/{savepost}',[SavePostController::class ,'destory']);
 //postLike
 Route::get('/postslikes',[postLikeController ::class,'index']);
 Route::post('/postslikes',[postLikeController ::class,'store']);

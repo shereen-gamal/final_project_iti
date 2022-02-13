@@ -68,7 +68,7 @@ class User extends Authenticatable
         return $this->hasMany(PagesLike::class,'user_id','id');
     }
     public function pages(){
-        return $this->hasMany(page::class,'user_id','id');
+        return $this->hasMany(Page::class,'user_id','id');
     }
 
 
