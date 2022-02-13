@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PostLikes;
 
 class Post extends Model
 {
@@ -12,6 +13,7 @@ class Post extends Model
     {
         return $this->hasMany(Photo::class,'post_id','id');
     }
+
     public  function comments()
     {
         return $this->hasMany(Comment::class,'post_id','id' );
@@ -20,6 +22,10 @@ class Post extends Model
     public  function shares()
     {
         return $this->hasMany(share::class,'post_id','id' );
+    }
+
+    public function postLikes(){
+        return $this->hasMany(PostLike::class,'post_id','id');
     }
 
     protected $fillable =[
