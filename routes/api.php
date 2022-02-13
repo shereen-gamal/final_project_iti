@@ -4,15 +4,12 @@ use App\Http\Controllers\CommentController;
 // use App\Http\Controllers\CommentlikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
->>>>>>> ea0194393495be897aec75a1b0ba2ddaff678485
 use App\Models\User;
 use App\Models\Photo;
 // use App\Models\Commentlike;
-use App\Http\Controllers\CommentLikeController ;
+// use App\Http\Controllers\CommentLikeController ;
 // use App\Models\User;
 use App\Models\CommentLike;
 use App\Http\Controllers\UserController;
@@ -74,3 +71,10 @@ Route::get('/commentslike',[CommentLikeController ::class,'index']);
 Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
 Route::post('/commentslike',[CommentLikeController ::class,'store']);
 Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
+
+//savepostslike Routes
+Route::get('/saveposts',[SavepostController::class,'index']);
+Route::get('/saveposts/{savepost}',[SavepostController ::class,'show']);
+Route::post('/saveposts',[SavepostController::class,'store']);
+Route::put('/saveposts/{savepost}',[SavepostController::class ,'update']);
+Route::delete('/saveposts/{savepost}',[SavepostController::class ,'destory']);
