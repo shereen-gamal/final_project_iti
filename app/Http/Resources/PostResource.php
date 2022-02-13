@@ -19,6 +19,7 @@ class PostResource extends JsonResource
             'content'=>$this->content,
             'comments'=> new CommentResource($this->comments),
             'user_id'=>new UserResource($this->user),
+            'post_likes'=>$this->postLikes,
         ];
     }
 }

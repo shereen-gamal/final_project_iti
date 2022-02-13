@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PostLikes;
 
 class Post extends Model
 {
@@ -12,6 +13,7 @@ class Post extends Model
     {
         return $this->hasMany(Photo::class,'post_id','id');
     }
+
     public  function comments()
     {
         return $this->hasMany(Comment::class,'post_id','id' );
