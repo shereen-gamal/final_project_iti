@@ -9,6 +9,7 @@ use App\Http\Controllers\postLikeController ;
 use App\Http\Controllers\ChatController ;
 use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PageController;
 
 use App\Models\User;
 use App\Models\Photo;
@@ -91,6 +92,12 @@ Route::get('/messages',[MessageController ::class,'index']);
 Route::get('/messages/{message}',[MessageController ::class,'show']);
 Route::post('/messages',[MessageController ::class,'store']);
 Route::delete('/messages/{message}',[MessageController ::class ,'destory']);
+//pages Routes
+Route::get('/pages',[PageController::class,'index']);
+Route::get('/pages/{page}',[PageController::class,'show']);
+Route::post('/pages',[PageController::class,'store']);
+Route::put('/pages/{page}',[PageController::class ,'update']);
+Route::delete('/pages/{page}',[PageController::class ,'destory']);
 
 Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
