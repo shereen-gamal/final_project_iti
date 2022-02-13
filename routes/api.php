@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-// use App\Http\Controllers\CommentlikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\GroupController;
@@ -11,9 +10,21 @@ use App\Models\Photo;
 // use App\Models\Commentlike;
 // use App\Http\Controllers\CommentLikeController ;
 // use App\Models\User;
-use App\Models\CommentLike;
+use App\Http\Controllers\postLikeController ;
+use App\Http\Controllers\ChatController ;
+use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
+
+// use App\Models\User;
+// use App\Models\Photo;
+use App\Models\CommentLike;
+use App\Models\postLike;
+
+use App\Events\MessageEvent;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +45,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //user Routes
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
-Route::get('/users',[UserController::class,'index'])->middleware('auth:sanctum');
+Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
@@ -78,3 +89,22 @@ Route::get('/saveposts/{savepost}',[SavepostController ::class,'show']);
 Route::post('/saveposts',[SavepostController::class,'store']);
 Route::put('/saveposts/{savepost}',[SavepostController::class ,'update']);
 Route::delete('/saveposts/{savepost}',[SavepostController::class ,'destory']);
+//postLike
+Route::get('/postslikes',[postLikeController ::class,'index']);
+Route::post('/postslikes',[postLikeController ::class,'store']);
+Route::delete('/postslikes/{postslike}',[postLikeController ::class ,'destory']);
+//chat Routes
+Route::get('/chats',[ChatController ::class,'index']);
+Route::get('/chats/{chat}',[ChatController ::class,'show']);
+Route::post('/chats',[ChatController ::class,'store']);
+Route::delete('/chats/{chat}',[ChatController ::class ,'destory']);
+//message Routes
+Route::get('/messages',[MessageController ::class,'index']);
+Route::get('/messages/{message}',[MessageController ::class,'show']);
+Route::post('/messages',[MessageController ::class,'store']);
+Route::delete('/messages/{message}',[MessageController ::class ,'destory']);
+
+Route::post('/send-message',function(Request $data){
+    event(new MessageEvent('from vs'));
+});
+
