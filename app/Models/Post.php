@@ -22,6 +22,11 @@ class Post extends Model
         return $this->hasMany(share::class,'post_id','id' );
     }
 
+    public  function postLike()
+    {
+        return $this->hasMany(postLike::class,'post_id','id' );
+    }
+
     protected $fillable =[
         'content',
         'user_id',
