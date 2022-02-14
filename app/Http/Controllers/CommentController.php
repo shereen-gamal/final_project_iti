@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CommentResource;
 
 use App\Models\Comment;
+use App\Models\Friend;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller

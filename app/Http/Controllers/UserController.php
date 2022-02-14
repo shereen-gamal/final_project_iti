@@ -39,6 +39,7 @@ class UserController extends Controller
 
     public function index()
     {
+
         // $allusers = user::with('posts','friends','savedposts')->get();
         $allusers = user::with('posts','friends','friend','groups','pageLikes','chats','chat','pages')->get();
         return $allusers;
@@ -47,8 +48,9 @@ class UserController extends Controller
 
     public function show($userId)
     {
-        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats','pages')->get()->where('id',$userId)->first();
+
+       // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats')->get()->where('id',$userId)->first();
         return  $user;
     }
 
@@ -67,7 +69,7 @@ class UserController extends Controller
         $user = User::create([
             //only data from form
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' =>Hash::make($data['password']),
             'firstname' => $data['firstname'],
             'lasttname' => $data['lastname'],
             'date_of_birth' => $data['date_of_birth'],

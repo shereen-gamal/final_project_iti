@@ -5,6 +5,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
+use App\Http\Controllers\FriendController;
+
 use App\Models\User;
 use App\Models\Photo;
 use App\Http\Controllers\postLikeController ;
@@ -45,10 +47,8 @@ Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
-
 Route::post('/user/id', [UserController::class,'getUserId']);
 Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middleware('auth:sanctum');
-
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
 Route::get('/posts/{post}',[postController::class,'show']);
@@ -105,6 +105,10 @@ Route::get('/pages/{page}',[PageController::class,'show']);
 Route::post('/pages',[PageController::class,'store']);
 Route::put('/pages/{page}',[PageController::class ,'update']);
 Route::delete('/pages/{page}',[PageController::class ,'destory']);
+ //friend Routes
+ Route::get('/friends',[FriendController::class,'index']);
+ Route::post('/friends',[FriendController::class,'store']);
+ Route::delete('/friends/{friend}',[FriendController::class ,'destory']);
 
 Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
