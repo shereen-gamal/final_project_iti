@@ -108,7 +108,7 @@ Route::delete('/pages/{page}',[PageController::class ,'destory']);
  //friend Routes
  Route::get('/friends',[FriendController::class,'index']);
  Route::post('/friends',[FriendController::class,'store']);
- Route::delete('/friends/{friend}',[FriendController::class ,'destory']);
+ Route::delete('/friends/{friend}',[FriendController::class ,'destroy']);
 
 Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
