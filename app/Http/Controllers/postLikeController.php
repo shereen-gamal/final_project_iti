@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\postLike;
+use App\Models\PostLike;
 
 class postLikeController extends Controller
 {
@@ -11,19 +11,19 @@ class postLikeController extends Controller
     public function index()
     {
 
-        return postLike::all();
+        return PostLike::all();
    
     }
     public function store(){
         $data =request()->all();
-        $commentlike= postLike ::create([
+        $commentlike= PostLike ::create([
             'post_id'=>$data['post_id'],
             'user_id'=>$data['user_id'],
         ]);
         return $commentlike;
     }
     public function destory($id){
-        $commentlike=  postLike ::findOrFail($id);
+        $commentlike=  PostLike ::findOrFail($id);
         $commentlike->delete();
         return $commentlike;
     }

@@ -19,8 +19,6 @@ class FriendController extends Controller
         $pages = Friend::with('user')->get();
         return $pages;
     }
-
-
     public function store()
     {
         $data = request()->all();

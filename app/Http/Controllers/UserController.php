@@ -50,7 +50,7 @@ class UserController extends Controller
     {
 
        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats')->get()->where('id',$userId)->first();
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats','posts.user','posts.postLikes')->get()->where('id',$userId)->first();
         return  $user;
     }
 
