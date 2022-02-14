@@ -50,7 +50,7 @@ class UserController extends Controller
     {
 
        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','posts.postLikes','friends','friend','groups','pageLikes','chats')->get()->where('id',$userId)->first();
+        $user =User::with('posts.comments.user','posts.postLikes','friends','friend','groups','pageLikes','chats','posts.user')->get()->where('id',$userId)->first();
         return  $user;
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
             'school' => isset($data['school']) ? $data['school'] :'cairo school',
             'address' => isset($data['address']) ? $data['address'] :'my address',
-            'profilePic' => 'image',
+            'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
             'location' => 'my location',
         ]);
