@@ -6,7 +6,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
 use App\Http\Controllers\FriendController;
-
+use App\Http\Controllers\FileController;
 use App\Models\User;
 use App\Models\Photo;
 use App\Http\Controllers\postLikeController ;
@@ -114,3 +114,6 @@ Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
 });
 
+//For Uploading a file
+Route::post('/file',[FileController::class,'file']);
+Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
