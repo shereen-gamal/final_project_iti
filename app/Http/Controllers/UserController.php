@@ -41,7 +41,7 @@ class UserController extends Controller
     {
 
         // $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats','chat')->get();
+        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats','chat','pages')->get();
         return $allusers;
     }
 

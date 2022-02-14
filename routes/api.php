@@ -5,13 +5,16 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
+use App\Http\Controllers\FriendController;
+
+use App\Models\User;
+use App\Models\Photo;
 use App\Http\Controllers\postLikeController ;
 use App\Http\Controllers\ChatController ;
 use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
-
-use App\Models\User;
-use App\Models\Photo;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 
@@ -75,6 +78,13 @@ Route::get('/commentslike',[CommentLikeController ::class,'index']);
 Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
 Route::post('/commentslike',[CommentLikeController ::class,'store']);
 Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
+
+//savepostslike Routes
+Route::get('/saveposts',[SavePostController::class,'index']);
+Route::get('/saveposts/{savepost}',[SavePostController ::class,'show']);
+Route::post('/saveposts',[SavePostController::class,'store']);
+Route::put('/saveposts/{savepost}',[SavePostController::class ,'update']);
+Route::delete('/saveposts/{savepost}',[SavePostController::class ,'destory']);
 //postLike
 Route::get('/postslikes',[postLikeController ::class,'index']);
 Route::post('/postslikes',[postLikeController ::class,'store']);
@@ -89,6 +99,16 @@ Route::get('/messages',[MessageController ::class,'index']);
 Route::get('/messages/{message}',[MessageController ::class,'show']);
 Route::post('/messages',[MessageController ::class,'store']);
 Route::delete('/messages/{message}',[MessageController ::class ,'destory']);
+//pages Routes
+Route::get('/pages',[PageController::class,'index']);
+Route::get('/pages/{page}',[PageController::class,'show']);
+Route::post('/pages',[PageController::class,'store']);
+Route::put('/pages/{page}',[PageController::class ,'update']);
+Route::delete('/pages/{page}',[PageController::class ,'destory']);
+ //friend Routes
+ Route::get('/friends',[FriendController::class,'index']);
+ Route::post('/friends',[FriendController::class,'store']);
+ Route::delete('/friends/{friend}',[FriendController::class ,'destory']);
 
 Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
