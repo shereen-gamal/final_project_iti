@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allposts = Post::with('photos','comments.user','shares','postLikes','user')->get();
+        $allposts = Post::with('photos','comments.user','shares','postLikes','user.friends','user.friend')->get();
         //    $allposts=Post::all();
         return PostResource::collection($allposts);    
     }

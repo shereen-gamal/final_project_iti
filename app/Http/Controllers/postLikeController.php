@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostLike;
 
-class postLikeController extends Controller
+class PostLikeController extends Controller
 {
     //
     public function index()
