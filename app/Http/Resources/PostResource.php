@@ -21,6 +21,8 @@ class PostResource extends JsonResource
             'user_id'=>new UserResource($this->user),
             'post_likes'=>$this->postLikes,
             'created_at'=>$this->created_at,
+            'postPic'=>$this->postPic,
+            'hasPic'=>$this->hasPic,
         ];
     }
 }
