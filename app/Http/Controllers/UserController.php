@@ -50,7 +50,9 @@ class UserController extends Controller
     {
 
        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','posts.postLikes','friends','friend','groups','pageLikes','chats','posts.user')->get()->where('id',$userId)->first();
+
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes','chats','posts.user','posts.postLikes')->get()->where('id',$userId)->first();
+
         return  $user;
     }
 
@@ -101,6 +103,19 @@ class UserController extends Controller
             ]);
         }
         return $user->userid;
+    }
+
+
+    function search($name)
+    {
+        $result = User::where('name', 'LIKE','%'.$name.'%')->get();
+        if(count($result)){
+         return Response()->json($result);
+        }
+        else
+        {
+        return response()->json(['Result' => 'No Data not found'], 404);
+      }
     }
 
 
