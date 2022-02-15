@@ -8,12 +8,12 @@ use App\Models\Page;
 class PageController extends Controller
 {
     public function index(){
-        $pages = Page::with('user')->get();
+        $pages = Page::with('user','posts')->get();
         return $pages;
     }
 
     public function show($id){
-        $page = Page::with('user')->get()->find($id);
+        $page = Page::with('user','posts')->get()->find($id);
         return $page;
     }
 
