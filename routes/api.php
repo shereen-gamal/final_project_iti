@@ -117,3 +117,4 @@ Route::post('/send-message',function(Request $data){
 //For Uploading a file
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
+Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
