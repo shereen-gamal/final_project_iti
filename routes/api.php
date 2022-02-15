@@ -6,7 +6,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommentLikeController ;
 use App\Http\Controllers\FriendController;
-
+use App\Http\Controllers\FileController;
 use App\Models\User;
 use App\Models\Photo;
 use App\Http\Controllers\postLikeController ;
@@ -45,6 +45,7 @@ Route::post('/user/token', [UserController::class,'Login']);/****************tok
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
+Route::get('/users/{user}',[UserController::class,'search']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
@@ -105,12 +106,18 @@ Route::get('/pages/{page}',[PageController::class,'show']);
 Route::post('/pages',[PageController::class,'store']);
 Route::put('/pages/{page}',[PageController::class ,'update']);
 Route::delete('/pages/{page}',[PageController::class ,'destory']);
+Route::get('/pages/{page}',[PageController::class,'search']);
+
  //friend Routes
  Route::get('/friends',[FriendController::class,'index']);
  Route::post('/friends',[FriendController::class,'store']);
- Route::delete('/friends/{friend}',[FriendController::class ,'destory']);
+ Route::delete('/friends/{friend}',[FriendController::class ,'destroy']);
 
 Route::post('/send-message',function(Request $data){
     event(new MessageEvent('from vs'));
 });
 
+//For Uploading a file
+Route::post('/file',[FileController::class,'file']);
+Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
+Route::post('/postpicture/{id}',[FileController::class,'postPicture']);

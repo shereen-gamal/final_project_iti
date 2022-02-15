@@ -50,7 +50,9 @@ class UserController extends Controller
     {
 
        // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes.page','chats.user','pages')->get()->where('id',$userId)->first();
+
+        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes.page','chats.user','pages','posts.user','posts.postLikes')->get()->where('id',$userId)->first();
+
         return  $user;
     }
 
@@ -80,7 +82,7 @@ class UserController extends Controller
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
             'school' => isset($data['school']) ? $data['school'] :'cairo school',
             'address' => isset($data['address']) ? $data['address'] :'my address',
-            'profilePic' => 'image',
+            'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
             'location' => 'my location',
         ]);
@@ -101,6 +103,19 @@ class UserController extends Controller
             ]);
         }
         return $user->userid;
+    }
+
+
+    function search($name)
+    {
+        $result = User::where('name', 'LIKE','%'.$name.'%')->get();
+        if(count($result)){
+         return Response()->json($result);
+        }
+        else
+        {
+        return response()->json(['Result' => 'No Data not found'], 404);
+      }
     }
 
 

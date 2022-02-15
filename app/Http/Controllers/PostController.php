@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allposts = Post::with('photos','comments.user','shares','postLikes','user')->get();
+        $allposts = Post::with('photos','comments.user','shares','postLikes','user.friends','user.friend')->get();
         //    $allposts=Post::all();
         return PostResource::collection($allposts);    
     }
@@ -29,6 +29,7 @@ class PostController extends Controller
         $post = Post::create([
             'content' => $data['content'],
             'user_id' => $data['user_id'],
+             'hasPic' => false
         ]);
         return $post;
     }

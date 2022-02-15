@@ -24,8 +24,8 @@ class CreateFriendsTable extends Migration
             ->nullable()
             ->constrained()
             ->references('id')->on('users');
-            $table->timestamps();
 
+            $table->timestamps();
         });
     }
 
