@@ -13,4 +13,7 @@ class Message extends Model
     public function chat(){
         $this->belongsTo(Chat::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class,'from_user_id','id');
+    }
 }

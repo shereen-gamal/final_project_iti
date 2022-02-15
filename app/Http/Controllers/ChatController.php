@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     public function index(){
-        $chats = Chat::with('messages','user')->get();
+        $chats = Chat::with('messages.user','user')->get();
         return $chats;
     }
 
     public function show($id){
-        $chat = Chat::with('messages','user')->get()->find($id);
+        $chat = Chat::with('messages.user','user')->get()->find($id);
         return $chat;
     }
 
