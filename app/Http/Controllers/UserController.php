@@ -41,7 +41,7 @@ class UserController extends Controller
     {
 
         // $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats','chat','pages')->get();
+        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats.user','chat','pages')->get();
         return $allusers;
     }
 
@@ -80,7 +80,7 @@ class UserController extends Controller
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
             'school' => isset($data['school']) ? $data['school'] :'cairo school',
             'address' => isset($data['address']) ? $data['address'] :'my address',
-            'profilePic' => 'image',
+            'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
             'location' => 'my location',
         ]);

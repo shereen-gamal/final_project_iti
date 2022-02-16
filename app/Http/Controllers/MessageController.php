@@ -23,10 +23,10 @@ class MessageController extends Controller
         // event to make realtime application
         event(new MessageEvent($data->content));
         $message=Message::create([	
-            'content'=>$data->content,
+            'content'=>isset($data->content)?$data->content:"new message",
             'chat_id'=>isset($data->chat_id)?$data->chat_id:1,
-            'from_user_id'=>isset($data->user1)?$data->user1:1,
-            'to_user_id'=>isset($data->user2)?$data->user2:2,
+            'from_user_id'=>isset($data->from_user_id)?$data->from_user_id:13,
+            'to_user_id'=>isset($data->to_user_id)?$data->to_user_id:3,
         ]);
        
         return $message;

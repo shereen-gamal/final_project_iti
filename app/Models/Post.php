@@ -32,7 +32,8 @@ class Post extends Model
     protected $fillable =[
         'content',
         'user_id',
-
+        'postPic',
+        'hasPic'
     ];
 
     public function user(){
