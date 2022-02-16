@@ -24,7 +24,7 @@ class Post extends Model
         return $this->hasMany(share::class,'post_id','id' );
     }
 
-    public  function postLikes()
+    public  function PostLikes()
     {
         return $this->hasMany(PostLike::class,'post_id','id' );
     }

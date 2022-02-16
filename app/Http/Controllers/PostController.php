@@ -8,9 +8,24 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    function search($name)
+    {
+        $result = Post::where('content', 'LIKE','%'.$name.'%')->get();
+        if(count($result)){
+         return Response()->json($result);
+        }
+        else
+        {
+        return response()->json(['Result' => 'No Data not found'], 404);
+      }
+    }
+
+
+
     public function index()
     {
-        $allposts = Post::with('photos','comments.user','shares','postLikes','user.friends','user.friend')->get();
+        $allposts = Post::with('photos','comments.user','shares','PostLikes','user.friends','user.friend')->get();
         //    $allposts=Post::all();
         return PostResource::collection($allposts);    
     }
@@ -18,7 +33,7 @@ class PostController extends Controller
     public function show($postId)
     {
         //$onepost= Post::find($postId);
-        $onepost = Post::with('photos','comments.user','shares','postLikes','user')->get()->find($postId);
+        $onepost = Post::with('photos','comments.user','shares','PostLikes','user')->get()->find($postId);
         //  dd($onepost->photos);
         return new PostResource($onepost);
     }
