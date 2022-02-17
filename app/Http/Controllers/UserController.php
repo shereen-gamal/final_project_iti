@@ -92,6 +92,8 @@ class UserController extends Controller
             'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
             'location' => 'my location',
+            'hasCover' => false,
+            'intro' => 'Hello there! Welcome to my Profile.'
         ]);
         return $user;
     }
