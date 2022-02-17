@@ -30,7 +30,10 @@ class User extends Authenticatable
         'profilePic',
         'mobile',
         'location',
-        'userid'
+        'userid',
+        'intro',
+        'coverPic',
+        'hasCover'
     ];
 
     //many to many self relation

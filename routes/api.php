@@ -21,6 +21,7 @@ use App\Models\Friend;
 
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
+use App\Http\Controllers\ProfilePictureController;
 use App\Models\Chat;
 use App\Models\ChatLine;
 use Illuminate\Http\Request;
@@ -117,6 +118,7 @@ Route::get('/pages/{page}',[PageController::class,'search']);
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
+Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
 
@@ -144,3 +146,8 @@ Route::post('/friendship',function(){
     ]);
 
 });
+
+//profile pictures Routes
+Route::get('/profilepics',[ProfilePictureController::class,'index']);
+Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show']);
+Route::post('/profilepics',[ProfilePictureController::class,'store']);
