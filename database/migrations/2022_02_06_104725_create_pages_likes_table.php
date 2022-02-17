@@ -15,8 +15,10 @@ class CreatePagesLikesTable extends Migration
     {
         Schema::create('pages_likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('page_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('page_id')->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

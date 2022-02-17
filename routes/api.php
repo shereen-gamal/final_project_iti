@@ -59,7 +59,7 @@ Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.ind
 Route::get('/posts/{post}',[postController::class,'show']);
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
-Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
+Route::delete('/posts/{post}',[PostController::class,'destory']);
 //comment Routes
 Route::get('/comments',[CommentController::class,'index']);
 Route::get('/comments/{comment}',[CommentController::class,'show']);

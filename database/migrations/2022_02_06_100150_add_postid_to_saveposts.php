@@ -16,7 +16,8 @@ class AddPostidToSaveposts extends Migration
         Schema::table('save_posts', function (Blueprint $table) {
             $table->foreignId('post_id')
             ->nullable()
-            ->constrained();
+            ->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

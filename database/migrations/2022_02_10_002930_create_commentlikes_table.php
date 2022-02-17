@@ -16,9 +16,11 @@ class CreateCommentlikesTable extends Migration
         Schema::create('comment_likes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->nullable();
+            $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->foreignId('comment_id')->constrained()->references('id')->on('comments')
-            ->nullable();
+            ->nullable()->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

@@ -18,12 +18,14 @@ class CreateFriendsTable extends Migration
             $table->id();
             $table->foreignId('user_id')
             ->nullable()
-            ->constrained();
+            ->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
             
             $table->foreignId('friend_id')
             ->nullable()
             ->constrained()
-            ->references('id')->on('users');
+            ->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->timestamps();
         });
