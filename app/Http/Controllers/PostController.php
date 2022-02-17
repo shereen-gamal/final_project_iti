@@ -9,19 +9,6 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    function search($name)
-    {
-        $result = Post::where('content', 'LIKE','%'.$name.'%')->get();
-        if(count($result)){
-         return Response()->json($result);
-        }
-        else
-        {
-        return response()->json(['Result' => 'No Data not found'], 404);
-      }
-    }
-
-
 
     public function index()
     {

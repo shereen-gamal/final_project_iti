@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
+use App\Models\Page;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -106,14 +107,11 @@ class UserController extends Controller
 
     function search($name)
     {
-        $result = User::where('name', 'LIKE','%'.$name.'%')->get();
-        if(count($result)){
-         return Response()->json($result);
-        }
-        else
-        {
-        return response()->json(['Result' => 'No Data not found'], 404);
-      }
+        $resultUser = User::with('posts.comments.user','friends','friend','groups','pageLikes','chats','posts.user','posts.postLikes')->where('name', 'LIKE','%'.$name.'%')->get();
+        $resultPage = Page::with('photos','comments.user','shares','PostLikes','user')->where('page_name', 'LIKE','%'.$name.'%')->get();
+        $resultPost = Post::where('content', 'LIKE','%'.$name.'%')->get();
+         return Response()->json(['resultUser'=>$resultUser,'resultPage'=>$resultPage,'resultPost'=>$resultPost]);
+         
     }
 
 
