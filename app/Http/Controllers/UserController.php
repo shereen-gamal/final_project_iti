@@ -39,20 +39,27 @@ class UserController extends Controller
 
     public function index()
     {
-
-        // $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats.user','chat','pages')->get();
+        $allusers = user::with(
+            'posts','friends','friend',
+            'groups','pageLikes',
+            'chatLines.toUser',
+            'chatLines.chat.messages',
+            'pages')->get();
         return $allusers;
     }
 
 
     public function show($userId)
     {
-
-       // $user =User::with('posts','friends','savedposts')->get()->where('id',$userId);
-
-        $user =User::with('posts.comments.user','friends','friend','groups','pageLikes.page','chats.user','pages','posts.user','posts.postLikes')->get()->where('id',$userId)->first();
-
+        $user =User::with(
+            'posts.comments.user',
+            'friends','friend',
+            'pageLikes.page',
+            'chatLines.toUser',
+            'chatLines.chat.messages',
+            'pages','posts.user',
+            'posts.postLikes')->get()->find($userId);
+        
         return  $user;
     }
 

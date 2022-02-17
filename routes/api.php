@@ -17,9 +17,12 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
+use App\Models\Friend;
 
 use App\Events\MessageEvent;
-
+use App\Http\Controllers\ChatLineController;
+use App\Models\Chat;
+use App\Models\ChatLine;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -45,7 +48,7 @@ Route::post('/user/token', [UserController::class,'Login']);/****************tok
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
-Route::get('/users/{user}',[UserController::class,'search']);
+//Route::get('/users/{user}',[UserController::class,'search']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
@@ -79,7 +82,6 @@ Route::get('/commentslike',[CommentLikeController ::class,'index']);
 Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
 Route::post('/commentslike',[CommentLikeController ::class,'store']);
 Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
-
 //savepostslike Routes
 Route::get('/saveposts',[SavePostController::class,'index']);
 Route::get('/saveposts/{savepost}',[SavePostController ::class,'show']);
@@ -107,17 +109,38 @@ Route::post('/pages',[PageController::class,'store']);
 Route::put('/pages/{page}',[PageController::class ,'update']);
 Route::delete('/pages/{page}',[PageController::class ,'destory']);
 Route::get('/pages/{page}',[PageController::class,'search']);
-
  //friend Routes
  Route::get('/friends',[FriendController::class,'index']);
  Route::post('/friends',[FriendController::class,'store']);
  Route::delete('/friends/{friend}',[FriendController::class ,'destroy']);
-
-Route::post('/send-message',function(Request $data){
-    event(new MessageEvent('from vs'));
-});
-
 //For Uploading a file
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
+//chatline Routes
+Route::post('/chatlines',[ChatLineController::class ,'store']);
+
+//important Route when you add friend you create chat between two users
+// body of this post Route is {user_id,friend_id,id(chat_id)}
+Route::post('/friendship',function(){
+    $data = request()->all();
+    Friend::create([
+        'user_id'=>$data['user_id'],
+        'friend_id'=>$data['friend_id']
+    ]);
+    Chat::create([
+        'id'=>$data['id'],
+    ]);
+    ChatLine::create([
+        'from_user_id'=>$data['user_id'],
+        'to_user_id'=>$data['friend_id'],
+        'chat_id'=>$data['id']
+    ]);
+    ChatLine::create([
+        'from_user_id'=>$data['friend_id'],
+        'to_user_id'=>$data['user_id'],
+        'chat_id'=>$data['id']
+
+    ]);
+
+});

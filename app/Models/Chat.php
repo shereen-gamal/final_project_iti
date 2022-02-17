@@ -9,14 +9,14 @@ class Chat extends Model
 {
     use HasFactory;
 
-    protected $fillable =[];
+    protected $fillable =['id'];
 
     public function messages(){
         return $this->hasMany(Message::class,'chat_id','id');
     }
-    public function user(){
-        return $this->belongsTo(User::class,'secondary_user_id','id');
-    }
 
+    public function chatLines(){
+        return $this->hasMany(ChatLine::class,'chat_id','id');
+    }
 
 }
