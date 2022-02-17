@@ -17,9 +17,12 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('content',255);
-            $table->foreignId('chat_id')->constrained()->references('id')->on('chats');
-            $table->foreignId('from_user_id')->constrained()->references('id')->on('users');
-            $table->foreignId('to_user_id')->constrained()->references('id')->on('users');
+            $table->foreignId('chat_id')->constrained()->references('id')->on('chats')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('from_user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('to_user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

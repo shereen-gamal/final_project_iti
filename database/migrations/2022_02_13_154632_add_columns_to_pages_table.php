@@ -15,7 +15,8 @@ class AddColumnsToPagesTable extends Migration
     {
         Schema::table('pages', function (Blueprint $table) {
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->references('id')->on('users');
+            $table->foreignId('user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->string('about',255);
         });
     }

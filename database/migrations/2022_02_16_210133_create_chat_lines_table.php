@@ -15,9 +15,12 @@ class CreateChatLinesTable extends Migration
     {
         Schema::create('chat_lines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chat_id')->constrained()->references('id')->on('chats');
-            $table->foreignId('from_user_id')->constrained()->references('id')->on('users');
-            $table->foreignId('to_user_id')->constrained()->references('id')->on('users');
+            $table->foreignId('chat_id')->constrained()->references('id')->on('chats')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('from_user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('to_user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->unique(['from_user_id','to_user_id']);
             $table->timestamps();
         });

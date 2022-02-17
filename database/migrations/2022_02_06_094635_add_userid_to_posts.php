@@ -16,7 +16,8 @@ class AddUseridToPosts extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->foreignId('user_id')
             ->nullable()
-            ->constrained();
+            ->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
