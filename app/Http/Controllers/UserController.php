@@ -40,9 +40,12 @@ class UserController extends Controller
 
     public function index()
     {
-
-        // $allusers = user::with('posts','friends','savedposts')->get();
-        $allusers = user::with('posts','friends','friend','groups','pageLikes','chats.user','chat','pages')->get();
+        $allusers = user::with(
+            'posts','friends','friend',
+            'groups','pageLikes',
+            'chatLines.toUser',
+            'chatLines.chat.messages',
+            'pages')->get();
         return $allusers;
     }
 
@@ -84,6 +87,8 @@ class UserController extends Controller
             'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
             'location' => 'my location',
+            'hasCover' => false,
+            'intro' => 'Hello there! Welcome to my Profile.'
         ]);
         return $user;
     }
@@ -107,9 +112,9 @@ class UserController extends Controller
 
     function search($name)
     {
-        $resultUser = User::with('posts.comments.user','friends','friend','groups','pageLikes','chats','posts.user','posts.postLikes')->where('name', 'LIKE','%'.$name.'%')->get();
-        $resultPage = Page::with('photos','comments.user','shares','PostLikes','user')->where('page_name', 'LIKE','%'.$name.'%')->get();
-        $resultPost = Post::where('content', 'LIKE','%'.$name.'%')->get();
+        $resultUser = User::with('posts.comments.user','friends','friend','groups','pageLikes','posts.user','posts.postLikes')->where('name', 'LIKE','%'.$name.'%')->get();
+        $resultPage = Page::where('page_name', 'LIKE','%'.$name.'%')->get();
+        $resultPost = Post::with('photos','comments.user','shares','PostLikes','user.friends','user.friend')->where('content', 'LIKE','%'.$name.'%')->get();
          return Response()->json(['resultUser'=>$resultUser,'resultPage'=>$resultPage,'resultPost'=>$resultPost]);
          
     }

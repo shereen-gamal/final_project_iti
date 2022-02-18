@@ -30,7 +30,10 @@ class User extends Authenticatable
         'profilePic',
         'mobile',
         'location',
-        'userid'
+        'userid',
+        'intro',
+        'coverPic',
+        'hasCover'
     ];
 
     //many to many self relation
@@ -44,13 +47,9 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class,'friends','friend_id','user_id');
     }
 
-    public function chats(){
-        return $this->hasMany(Chat::class,'primary_user_id','id');
-    }
-
-    public function chat(){
-        return $this->hasMany(Chat::class,'secondary_user_id','id');
-    }
+   public function chatLines(){
+       return $this->hasMany(ChatLine::class,'from_user_id','id');
+   }
 
     public function posts(){
         return $this->hasMany( Post::class ,'user_id','id');
