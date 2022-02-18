@@ -18,6 +18,7 @@ use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 use App\Models\Friend;
+use Pusher\Pusher;
 
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
@@ -28,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -151,3 +153,16 @@ Route::post('/friendship',function(){
 Route::get('/profilepics',[ProfilePictureController::class,'index']);
 Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show']);
 Route::post('/profilepics',[ProfilePictureController::class,'store']);
+
+//pusher api 
+Route::post('/pusher/auth',function(Request $request){
+  
+    $pusher = new Pusher(
+        config('broadcasting.connections.pusher.key'),
+        config('broadcasting.connections.pusher.secret'),
+        config('broadcasting.connections.pusher.app_id'),
+        config('broadcasting.connections.pusher.options')
+    );
+
+    return $pusher->socket_auth($request->channel_name, $request->socket_id);
+});
