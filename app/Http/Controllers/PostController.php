@@ -12,7 +12,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $allposts = Post::with('photos','comments.user','shares','PostLikes','user.friends','user.friend')->get();
+        $allposts = Post::with('photos','comments.user','shares','postLikes','user.friends','user.friend')->get();
         //    $allposts=Post::all();
         return PostResource::collection($allposts);    
     }
@@ -20,7 +20,7 @@ class PostController extends Controller
     public function show($postId)
     {
         //$onepost= Post::find($postId);
-        $onepost = Post::with('photos','comments.user','shares','PostLikes','user')->get()->find($postId);
+        $onepost = Post::with('photos','comments.user','shares','postLikes','user')->get()->find($postId);
         //  dd($onepost->photos);
         return new PostResource($onepost);
     }

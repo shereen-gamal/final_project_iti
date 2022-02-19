@@ -17,11 +17,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
-<<<<<<< HEAD
-=======
 use App\Models\Friend;
 use Pusher\Pusher;
->>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477
 
 use App\Events\MessageEvent;
 
@@ -61,13 +58,7 @@ Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.ind
 Route::get('/posts/{post}',[postController::class,'show']);
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
-<<<<<<< HEAD
-Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
-
-
-=======
 Route::delete('/posts/{post}',[PostController::class,'destory']);
->>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477
 //comment Routes
 Route::get('/comments',[CommentController::class,'index']);
 Route::get('/comments/{comment}',[CommentController::class,'show']);
@@ -132,9 +123,7 @@ Route::post('/send-message',function(Request $data){
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
-<<<<<<< HEAD
-=======
-Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
+
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
 
@@ -180,4 +169,3 @@ Route::post('/pusher/auth',function(Request $request){
 
     return $pusher->socket_auth($request->channel_name, $request->socket_id);
 });
->>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477
