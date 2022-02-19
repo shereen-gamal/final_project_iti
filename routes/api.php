@@ -17,6 +17,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
 use App\Models\CommentLike;
 use App\Models\postLike;
+<<<<<<< HEAD
+=======
+use App\Models\Friend;
+use Pusher\Pusher;
+>>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477
 
 use App\Events\MessageEvent;
 
@@ -24,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +61,13 @@ Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.ind
 Route::get('/posts/{post}',[postController::class,'show']);
 Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
 Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
+<<<<<<< HEAD
 Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware('auth:sanctum');
 
 
+=======
+Route::delete('/posts/{post}',[PostController::class,'destory']);
+>>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477
 //comment Routes
 Route::get('/comments',[CommentController::class,'index']);
 Route::get('/comments/{comment}',[CommentController::class,'show']);
@@ -122,3 +132,52 @@ Route::post('/send-message',function(Request $data){
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
+<<<<<<< HEAD
+=======
+Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
+//chatline Routes
+Route::post('/chatlines',[ChatLineController::class ,'store']);
+
+//important Route when you add friend you create chat between two users
+// body of this post Route is {user_id,friend_id,id(chat_id)}
+Route::post('/friendship',function(){
+    $data = request()->all();
+    Friend::create([
+        'user_id'=>$data['user_id'],
+        'friend_id'=>$data['friend_id']
+    ]);
+    Chat::create([
+        'id'=>$data['id'],
+    ]);
+    ChatLine::create([
+        'from_user_id'=>$data['user_id'],
+        'to_user_id'=>$data['friend_id'],
+        'chat_id'=>$data['id']
+    ]);
+    ChatLine::create([
+        'from_user_id'=>$data['friend_id'],
+        'to_user_id'=>$data['user_id'],
+        'chat_id'=>$data['id']
+
+    ]);
+
+});
+
+//profile pictures Routes
+Route::get('/profilepics',[ProfilePictureController::class,'index']);
+Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show']);
+Route::post('/profilepics',[ProfilePictureController::class,'store']);
+
+//pusher api 
+Route::post('/pusher/auth',function(Request $request){
+  
+    $pusher = new Pusher(
+        config('broadcasting.connections.pusher.key'),
+        config('broadcasting.connections.pusher.secret'),
+        config('broadcasting.connections.pusher.app_id'),
+        config('broadcasting.connections.pusher.options')
+    );
+
+    return $pusher->socket_auth($request->channel_name, $request->socket_id);
+});
+>>>>>>> b1974f61b7f9626b2c950ab05a0b1d9d65f37477

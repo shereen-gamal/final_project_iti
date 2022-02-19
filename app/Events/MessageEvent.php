@@ -36,12 +36,12 @@ class MessageEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return ['private-messages'];
     }
 
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'client-event';
     }
 
 }

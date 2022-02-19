@@ -16,7 +16,8 @@ class AddPostidToPhotos extends Migration
         Schema::table('photos', function (Blueprint $table) {
             $table->foreignId('post_id')
             ->nullable()
-            ->constrained();
+            ->constrained()->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

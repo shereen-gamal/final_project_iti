@@ -16,7 +16,8 @@ class AddColumnToPostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->foreignId('page_id')
             ->nullable()
-            ->constrained()->reference('id')->on('pages');
+            ->constrained()->reference('id')->on('pages')->onDelete('cascade')
+            ->onUpdate('cascade');
 
         });
     }
