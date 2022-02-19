@@ -15,10 +15,13 @@ use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
+use App\Http\Controllers\ProfilePictureController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 use App\Models\Friend;
 use Pusher\Pusher;
+use App\Models\Chat;
+use App\Models\ChatLine;
 
 use App\Events\MessageEvent;
 
@@ -45,7 +48,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //user Routes
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
-Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
+Route::put('/users/{user}',[UserController::class, 'update']);
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::get('/search/{user}',[UserController::class,'search']);
@@ -53,6 +56,7 @@ Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('au
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
 Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middleware('auth:sanctum');
+
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
 Route::get('/posts/{post}',[postController::class,'show']);
@@ -123,6 +127,7 @@ Route::post('/send-message',function(Request $data){
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
+Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
 
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
