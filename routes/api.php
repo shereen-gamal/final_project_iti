@@ -26,7 +26,7 @@ use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\ProfilePictureController;
 use App\Models\Chat;
 use App\Models\ChatLine;
-
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -140,6 +140,15 @@ Route::delete('/friendship/{friend}',[FriendshipController::class,'unfriend']);
 Route::get('/profilepics',[ProfilePictureController::class,'index']);
 Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show']);
 Route::post('/profilepics',[ProfilePictureController::class,'store']);
+
+//notification Routes
+Route::get('/notifications',[Notification::class,'index']);
+Route::get('/notifications/{notification}',[Notification::class,'show']);
+Route::post('/notification',[Notification::class,'store']);
+Route::delete('/notifications/{notification}',[Notification::class,'destory']);
+
+
+
 
 //pusher api 
 Route::post('/pusher/auth',function(Request $request){

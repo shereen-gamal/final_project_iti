@@ -14,15 +14,15 @@ class FriendshipController extends Controller
     public function friend(){
         $data = request()->all();
         $last_chat = Chat::latest('created_at')->first();
-        $last_chat_id = $last_chat->id;
+        if ($last_chat == null){
+            $last_chat_id = 1;
+        }
+        else{
+            $last_chat_id = $last_chat->id;
+        }
+
         $new_id = $last_chat_id+1;
-        Friend::create([
-            'user_id'=>$data['user_id'],
-            'friend_id'=>$data['friend_id']
-        ]);
-        Chat::create([
-            'id'=>$new_id,
-        ]);
+
         ChatLine::create([
             'from_user_id'=>$data['user_id'],
             'to_user_id'=>$data['friend_id'],
@@ -33,6 +33,13 @@ class FriendshipController extends Controller
             'to_user_id'=>$data['user_id'],
             'chat_id'=>$new_id
 
+        ]);
+        Friend::create([
+            'user_id'=>$data['user_id'],
+            'friend_id'=>$data['friend_id']
+        ]);
+        Chat::create([
+            'id'=>$new_id,
         ]);
         return "we are now friends";
 
