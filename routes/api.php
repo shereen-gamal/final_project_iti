@@ -147,9 +147,6 @@ Route::get('/notifications/{notification}',[Notification::class,'show']);
 Route::post('/notification',[Notification::class,'store']);
 Route::delete('/notifications/{notification}',[Notification::class,'destory']);
 
-
-
-
 //pusher api 
 Route::post('/pusher/auth',function(Request $request){
   
