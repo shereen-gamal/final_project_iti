@@ -22,6 +22,7 @@ use Pusher\Pusher;
 
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
+use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\ProfilePictureController;
 use App\Models\Chat;
 use App\Models\ChatLine;
@@ -124,30 +125,9 @@ Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
 
-//important Route when you add friend you create chat between two users
-// body of this post Route is {user_id,friend_id,id(chat_id)}
-Route::post('/friendship',function(){
-    $data = request()->all();
-    Friend::create([
-        'user_id'=>$data['user_id'],
-        'friend_id'=>$data['friend_id']
-    ]);
-    Chat::create([
-        'id'=>$data['id'],
-    ]);
-    ChatLine::create([
-        'from_user_id'=>$data['user_id'],
-        'to_user_id'=>$data['friend_id'],
-        'chat_id'=>$data['id']
-    ]);
-    ChatLine::create([
-        'from_user_id'=>$data['friend_id'],
-        'to_user_id'=>$data['user_id'],
-        'chat_id'=>$data['id']
-
-    ]);
-
-});
+// new update for friend and unfriend api 
+Route::post('/friendship',[FriendshipController::class,'friend']);
+Route::delete('/friendship/{friend}',[FriendshipController::class,'unfriend']);
 
 //profile pictures Routes
 Route::get('/profilepics',[ProfilePictureController::class,'index']);
