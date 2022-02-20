@@ -25,13 +25,22 @@ class PostController extends Controller
         return new PostResource($onepost);
     }
 
+    // public function showsave()
+    // {
+    //     //$onepost= Post::find($postId);
+    //     $post = Post::with('photos','comments.user','shares','postLikes','user')->where('user_id','=',auth()->user()->id)->where('save_post','=','1')->get();
+    //     //dd($onepost->photos);
+    //     return PostResource::collection($post);
+    // }
+
     public function store()
     {
         $data = request()->all();
         $post = Post::create([
             'content' => $data['content'],
             'user_id' => $data['user_id'],
-             'hasPic' => false
+             'hasPic' => false,
+             'save_post'=>false,
         ]);
         return $post;
     }
@@ -42,7 +51,18 @@ class PostController extends Controller
         $post->update($data->all());
         return $post;
     }
-
+    /*public function savepost($id, Request $data)
+    {
+        $post = Post::find($id);
+        $post->update(array('save_post' => 1));
+        return $post;
+    }
+    public function deletesave($id, Request $data)
+    {
+        $post = Post::find($id);
+        $post->update(array('save_post' => 0));
+        return $post;
+    }*/
     public function destory($id)
     {
         $post = Post::findOrFail($id);

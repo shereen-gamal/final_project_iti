@@ -13,4 +13,10 @@ class share extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+
+    public  function savepost()
+    {
+        return $this->belongsTo(SavePost::class);
+    }
 }

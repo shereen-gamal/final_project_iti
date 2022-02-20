@@ -62,7 +62,19 @@ class UserController extends Controller
         )->get()->find($userId); 
         return $user;
     }
-
+/*public function showsave($userId)
+    {
+    $users = user::with('posts.comments.user',
+    'friends',
+    'friend',
+    'pageLikes.page',
+    'chatLines.toUser',
+    'chatLines.chat.messages',
+    'pages',
+    'posts.user',
+    'posts.postLikes')->join('posts','users.id','=','posts.user_id')->where('posts.user_id','=',$userId)->where('save_post','=','1')->get();
+    return $users;
+    }*/
 
     public function destroy($userId)
     {
