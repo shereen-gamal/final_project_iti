@@ -8,22 +8,6 @@ use App\Models\Page;
 class PageController extends Controller
 {
 
-
-
-    function search($name)
-    {
-        $result = Page::where('page_name', 'LIKE','%'.$name.'%')->get();
-        if(count($result)){
-         return Response()->json($result);
-        }
-        else
-        {
-        return response()->json(['Result' => 'No Data not found'], 404);
-      }
-    }
-
-
-
     public function index(){
         $pages = Page::with('user','posts')->get();
         return $pages;

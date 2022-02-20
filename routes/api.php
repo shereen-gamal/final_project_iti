@@ -26,6 +26,7 @@ use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\ProfilePictureController;
 use App\Models\Chat;
 use App\Models\ChatLine;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -52,7 +53,7 @@ Route::post('/user/token', [UserController::class,'Login']);/****************tok
 Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
-//Route::get('/users/{user}',[UserController::class,'search']);
+Route::get('/search/{user}',[UserController::class,'search']);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
@@ -86,6 +87,7 @@ Route::get('/commentslike',[CommentLikeController ::class,'index']);
 Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show']);
 Route::post('/commentslike',[CommentLikeController ::class,'store']);
 Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory']);
+
 //savepostslike Routes
 Route::get('/saveposts',[SavePostController::class,'index']);
 Route::get('/saveposts/{savepost}',[SavePostController ::class,'show']);
@@ -112,16 +114,21 @@ Route::get('/pages/{page}',[PageController::class,'show']);
 Route::post('/pages',[PageController::class,'store']);
 Route::put('/pages/{page}',[PageController::class ,'update']);
 Route::delete('/pages/{page}',[PageController::class ,'destory']);
-Route::get('/pages/{page}',[PageController::class,'search']);
+
  //friend Routes
  Route::get('/friends',[FriendController::class,'index']);
  Route::post('/friends',[FriendController::class,'store']);
  Route::delete('/friends/{friend}',[FriendController::class ,'destroy']);
+
+Route::post('/send-message',function(Request $data){
+    event(new MessageEvent('from vs'));
+});
+
 //For Uploading a file
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
-Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
+
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
 
