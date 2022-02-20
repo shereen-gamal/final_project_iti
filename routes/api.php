@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
 use App\Http\Controllers\ProfilePictureController;
+use App\Http\Controllers\shareController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 use App\Models\Friend;
@@ -26,9 +27,7 @@ use App\Models\ChatLine;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
 use App\Http\Controllers\FriendshipController;
-use App\Http\Controllers\ProfilePictureController;
-use App\Models\Chat;
-use App\Models\ChatLine;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -158,3 +157,8 @@ Route::post('/pusher/auth',function(Request $request){
 
     return $pusher->socket_auth($request->channel_name, $request->socket_id);
 });
+//shares
+Route::get('/shares',[shareController ::class,'index']);
+Route::get('/shares/{share}',[shareController::class,'show']);
+Route::post('/shares',[shareController ::class,'store']);
+Route::delete('/shares/{shares}',[shareController ::class ,'destory']);
