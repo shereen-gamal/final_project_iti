@@ -9,6 +9,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class UserController extends Controller
 {
     public function Login(Request $request)
@@ -28,13 +30,29 @@ class UserController extends Controller
     }
 
 
-    public function update($UserId, Request $data)
+    public function update($UserId, Request $request)
     {
+        $data = $request->all();
         $oneUser = User::findOrFail($UserId);
-        $oneUser->update(
-            $data->all()
-        );
-        return $oneUser;
+        $oneUser->update([
+            'email' => (isset($data['email']))? $data['email']: $oneUser->email,
+            'firstname' => isset($data['firstname'])? $data['firstname']: $oneUser->firstname,
+            'lasttname' => isset($data['lasttname'])? $data['lasttname']: $oneUser->lasttname,
+            // 'name' => $this->firstname . ' ' . $this->lasttname,
+            // 'password' => Hash::make($data['password']),
+            'date_of_birth' => isset($data['date_of_birth'])? $data['date_of_birth']: $oneUser->date_of_birth,
+            'mobile' => isset($data['mobile'])? $data['mobile']: $oneUser->mobile,
+            'location' => isset($data['location'])? $data['location']: $oneUser->location,
+            'intro' => isset($data['intro'])? $data['intro']: $oneUser->intro,
+
+
+        ]);
+        $updatedUser = User::findOrFail($UserId);
+        $updatedUser->update([
+            'name' => $updatedUser->firstname . ' ' . $updatedUser->lasttname,
+        ]);
+        
+        return $updatedUser;
     }
 
 
@@ -83,6 +101,7 @@ class UserController extends Controller
             'lasttname' => $data['lastname'],
             'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
+            'location' => $data['location'],
             //************* */
             'userid' => uniqid(),
             'name' => $data['firstname'] . " " . $data['lastname'],
@@ -91,7 +110,6 @@ class UserController extends Controller
             'address' => isset($data['address']) ? $data['address'] :'my address',
             'profilePic' => 'default.jpg',
             'mobile' => '01234567891',
-            'location' => 'my location',
             'hasCover' => false,
             'intro' => 'Hello there! Welcome to my Profile.'
         ]);
