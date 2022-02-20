@@ -26,6 +26,7 @@ use App\Models\ChatLine;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
 use App\Http\Controllers\FriendshipController;
+use App\Http\Controllers\NotificationController;
 use App\Models\Notification;
 
 use Illuminate\Http\Request;
@@ -144,10 +145,10 @@ Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show'])
 Route::post('/profilepics',[ProfilePictureController::class,'store']);
 
 //notification Routes
-Route::get('/notifications',[Notification::class,'index']);
-Route::get('/notifications/{notification}',[Notification::class,'show']);
-Route::post('/notification',[Notification::class,'store']);
-Route::delete('/notifications/{notification}',[Notification::class,'destory']);
+Route::get('/notifications',[NotificationController::class,'index']);
+Route::get('/notifications/{notification}',[NotificationController::class,'show']);
+Route::post('/notifications',[NotificationController::class,'store']);
+Route::delete('/notifications/{notification}',[NotificationController::class,'destory']);
 
 //pusher api 
 Route::post('/pusher/auth',function(Request $request){

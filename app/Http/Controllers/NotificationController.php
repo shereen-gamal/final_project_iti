@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Error\Notice;
+use App\Models\Post;
+
 
 class NotificationController extends Controller
 {
@@ -26,10 +28,11 @@ class NotificationController extends Controller
 
     public function store(){
         $data = request()->all();
+        $post = Post::with('user')->get()->where('id',$data['post_id'])->first();
         $notification = Notification::create([
             'type'=>$data['type'],
             'from_user_id'=> $data['from_user_id'],
-            'to_user_id'=> $data['to_user_id'],
+            'to_user_id'=> $post->user->id,
             'post_id'=>$data['post_id'],
         ]);
         return $notification;
