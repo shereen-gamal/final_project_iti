@@ -15,6 +15,7 @@ use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
+use App\Http\Controllers\shareController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 use App\Models\Friend;
@@ -23,10 +24,13 @@ use App\Models\Chat;
 use App\Models\ChatLine;
 use App\Http\Controllers\ProfilePictureController;
 use App\Events\MessageEvent;
+use App\Http\Controllers\ChatLineController;
+use App\Http\Controllers\FriendshipController;
+use App\Http\Controllers\NotificationController;
+use App\Models\Notification;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,7 +51,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //user Routes
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
-Route::put('/users/{user}',[UserController::class, 'update'])->middleware('auth:sanctum');
+Route::put('/users/{user}',[UserController::class, 'update']);
 Route::get('/users',[UserController::class,'index']);
 Route::get('/users/{user}',[UserController::class,'show']);
 Route::get('/search/{user}',[UserController::class,'search']);
@@ -131,39 +135,25 @@ Route::post('/send-message',function(Request $data){
 Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
+Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
 
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
 
-//important Route when you add friend you create chat between two users
-// body of this post Route is {user_id,friend_id,id(chat_id)}
-Route::post('/friendship',function(){
-    $data = request()->all();
-    Friend::create([
-        'user_id'=>$data['user_id'],
-        'friend_id'=>$data['friend_id']
-    ]);
-    Chat::create([
-        'id'=>$data['id'],
-    ]);
-    ChatLine::create([
-        'from_user_id'=>$data['user_id'],
-        'to_user_id'=>$data['friend_id'],
-        'chat_id'=>$data['id']
-    ]);
-    ChatLine::create([
-        'from_user_id'=>$data['friend_id'],
-        'to_user_id'=>$data['user_id'],
-        'chat_id'=>$data['id']
-
-    ]);
-
-});
+// new update for friend and unfriend api 
+Route::post('/friendship',[FriendshipController::class,'friend']);
+Route::delete('/friendship/{friend}',[FriendshipController::class,'unfriend']);
 
 //profile pictures Routes
 Route::get('/profilepics',[ProfilePictureController::class,'index']);
 Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show']);
 Route::post('/profilepics',[ProfilePictureController::class,'store']);
+
+//notification Routes
+Route::get('/notifications',[NotificationController::class,'index']);
+Route::get('/notifications/{notification}',[NotificationController::class,'show']);
+Route::post('/notifications',[NotificationController::class,'store']);
+Route::delete('/notifications/{notification}',[NotificationController::class,'destory']);
 
 //pusher api 
 Route::post('/pusher/auth',function(Request $request){
@@ -177,3 +167,8 @@ Route::post('/pusher/auth',function(Request $request){
 
     return $pusher->socket_auth($request->channel_name, $request->socket_id);
 });
+//shares
+Route::get('/shares',[shareController ::class,'index']);
+Route::get('/shares/{share}',[shareController::class,'show']);
+Route::post('/shares',[shareController ::class,'store']);
+Route::delete('/shares/{shares}',[shareController ::class ,'destory']);

@@ -6,6 +6,8 @@ use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Friend;
 use Illuminate\Http\Request;
+use App\Models\Notification;
+
 
 class CommentController extends Controller
 {
@@ -29,6 +31,12 @@ class CommentController extends Controller
             'user_id'=>isset($data['user_id'])?$data['user_id']:1,
             'post_id'=>isset($data['post_id'])?$data['post_id']:1,
         ]);
+        // $notification = Notification::create([
+        //     'type'=>'commented',
+        //     'from_user_id'=> $data['user_id'],
+        //     'to_user_id'=> $data['to_user_id'],
+        //     'post_id'=>$data['post_id'],
+        // ]);
         return $comment;
     }
 
