@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostLiked;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Error\Notice;
@@ -29,6 +30,9 @@ class NotificationController extends Controller
     public function store(){
         $data = request()->all();
         $post = Post::with('user')->get()->where('id',$data['post_id'])->first();
+        
+        event(new PostLiked($data['type']));
+
         $notification = Notification::create([
             'type'=>$data['type'],
             'from_user_id'=> $data['from_user_id'],
