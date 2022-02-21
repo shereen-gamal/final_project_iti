@@ -76,7 +76,9 @@ class UserController extends Controller
             'chatLines.chat.messages',
             'pages',
             'posts.user',
-            'posts.postLikes'
+            'posts.postLikes',
+            'notifications.from_user',
+            'notifications.post'
         )->get()->find($userId); 
         return $user;
     }

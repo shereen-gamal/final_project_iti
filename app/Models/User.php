@@ -70,9 +70,10 @@ class User extends Authenticatable
         return $this->hasMany(Page::class,'user_id','id');
     }
 
-    public function notification(){
+    public function notifications(){
         return $this->hasMany(Notification::class,'to_user_id','id');
     }
+
 
 
     /**
