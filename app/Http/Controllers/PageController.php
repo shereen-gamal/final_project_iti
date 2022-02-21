@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Page;
+use App\Models\PagesLike;
 
 class PageController extends Controller
 {
 
     public function index(){
-        $pages = Page::with('user','posts')->get();
+        $pages = Page::with('user','pageslike','posts')->get();
         return $pages;
     }
 
     public function show($id){
-        $page = Page::with('user','posts')->get()->find($id);
+        $page = Page::with('user','pageslike','posts')->get()->find($id);
         return $page;
     }
 
