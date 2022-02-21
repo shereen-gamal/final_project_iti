@@ -21,8 +21,8 @@ class PageController extends Controller
     public function store(){
         $data = request()->all();
         $page = Page::create([
-            'profile_image'=>$data['profile_image'],
-            'cover_image'=>$data['cover_image'],
+            // 'profile_image'=>$data['profile_image'],
+            // 'cover_image'=>$data['cover_image'],
             'page_name'=>$data['page_name'],
             'user_id'=>$data['user_id'],
             'about'=>$data['about'],
@@ -32,7 +32,7 @@ class PageController extends Controller
 
     public function update($id, Request $data)
     {
-        $page = page::find($id);
+        $page = Page::find($id);
         $page->update($data->all());
         return $page;
     }
