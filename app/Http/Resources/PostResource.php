@@ -23,6 +23,7 @@ class PostResource extends JsonResource
             'created_at'=>$this->created_at,
             'postPic'=>$this->postPic,
             'hasPic'=>$this->hasPic,
+            'save_post'=>$this->save_post,
         ];
     }
 }

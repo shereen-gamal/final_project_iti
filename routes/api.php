@@ -15,7 +15,6 @@ use App\Http\Controllers\MessageController ;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
-use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\shareController;
 use App\Models\CommentLike;
 use App\Models\postLike;
@@ -23,6 +22,7 @@ use App\Models\Friend;
 use Pusher\Pusher;
 use App\Models\Chat;
 use App\Models\ChatLine;
+use App\Http\Controllers\ProfilePictureController;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
 use App\Http\Controllers\FriendshipController;
@@ -59,13 +59,18 @@ Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('au
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
 Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middleware('auth:sanctum');
+//Route::get('/showsave/{user}',[UserController::class,'showsave']);
 
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
 Route::get('/posts/{post}',[postController::class,'show']);
-Route::post('/posts',[PostController::class,'store'])->middleware('auth:sanctum');
-Route::put('/posts/{post}',[PostController::class,'update'])->middleware('auth:sanctum');
+Route::post('/posts',[PostController::class,'store']);
+Route::put('/posts/{post}',[PostController::class,'update']);
 Route::delete('/posts/{post}',[PostController::class,'destory']);
+//Route::put('/savepost/{post}',[PostController::class,'savepost']);
+//Route::put('/deletesave/{post}',[PostController::class,'deletesave']);
+//Route::get('/showsave',[PostController::class,'showsave'])->middleware('auth:sanctum');
+
 //comment Routes
 Route::get('/comments',[CommentController::class,'index']);
 Route::get('/comments/{comment}',[CommentController::class,'show']);

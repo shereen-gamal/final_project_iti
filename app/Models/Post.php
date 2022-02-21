@@ -28,12 +28,16 @@ class Post extends Model
     {
         return $this->hasMany(PostLike::class,'post_id','id' );
     }
-
+    public  function savePost()
+    {
+        return $this->hasMany(SavePost::class,'post_id','id' );
+    }
     protected $fillable =[
         'content',
         'user_id',
         'postPic',
-        'hasPic'
+        'hasPic',
+        'save_post',
     ];
 
     public function user(){

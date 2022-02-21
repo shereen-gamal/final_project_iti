@@ -12,6 +12,12 @@ class Photo extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public  function savepost()
+    {
+        return $this->belongsTo(SavePost::class);
+    }
+
     protected $fillable =[
         'image',
         'post_id',
