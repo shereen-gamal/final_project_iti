@@ -24,7 +24,9 @@ class CreateNotificationsTable extends Migration
             $table->foreignId('to_user_id')->constrained()->references('id')->on('users')->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->foreignId('post_id')->constrained()->references('id')->on('posts')->onDelete('cascade')
+            $table->foreignId('post_id')
+            ->nullable()
+            ->constrained()->onDelete('cascade')
             ->onUpdate('cascade');
             
             $table->timestamps();

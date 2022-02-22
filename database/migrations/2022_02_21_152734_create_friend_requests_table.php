@@ -19,6 +19,7 @@ class CreateFriendRequestsTable extends Migration
             ->onUpdate('cascade');
             $table->foreignId('friend_id')->constrained()->references('id')->on('users')->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->unique(['user_id','friend_id']);
             $table->timestamps();
         });
     }

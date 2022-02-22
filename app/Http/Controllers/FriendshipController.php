@@ -23,6 +23,10 @@ class FriendshipController extends Controller
 
         $new_id = $last_chat_id+1;
 
+        Chat::create([
+            'id'=>$new_id,
+        ]);
+
         ChatLine::create([
             'from_user_id'=>$data['user_id'],
             'to_user_id'=>$data['friend_id'],
@@ -38,9 +42,7 @@ class FriendshipController extends Controller
             'user_id'=>$data['user_id'],
             'friend_id'=>$data['friend_id']
         ]);
-        Chat::create([
-            'id'=>$new_id,
-        ]);
+       
         return "we are now friends";
 
     }

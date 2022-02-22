@@ -29,15 +29,15 @@ class NotificationController extends Controller
 
     public function store(){
         $data = request()->all();
-        $post = Post::with('user')->get()->where('id',$data['post_id'])->first();
-        
+        if (isset($data['post_id'])){
+            $post = Post::with('user')->get()->where('id',$data['post_id'])->first();
+        }
         event(new PostLiked($data['type']));
-
         $notification = Notification::create([
             'type'=>$data['type'],
             'from_user_id'=> $data['from_user_id'],
-            'to_user_id'=> $post->user->id,
-            'post_id'=>$data['post_id'],
+            'to_user_id'=>isset($data['to_user_id'])?$data['to_user_id']:$post->user->id,
+            'post_id'=>isset($data['post_id'])? $data['post_id']:null,
         ]);
         return $notification;
     }
