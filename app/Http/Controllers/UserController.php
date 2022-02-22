@@ -69,9 +69,9 @@ class UserController extends Controller
     {
         $user =User::with(
             'posts.comments.user',
-            'friends',
-            'friend',
-            'pageLikes.page',
+            'friends.posts',
+            'friend.posts',
+            'pageLikes.page.posts',
             'chatLines.toUser',
             'chatLines.chat.messages',
             'pages',
@@ -170,6 +170,16 @@ class UserController extends Controller
             ]);
         }
         return $user;
+    }
+    public function dashboard($userId){
+        $user =User::with(
+            'friends.posts.user','friends.posts.comments.user','friends.posts.postLikes',
+            'friend.posts.user','friend.posts.comments.user','friend.posts.postLikes',
+            'pageLikes.page.posts.page','pageLikes.page.posts.comments.user','pageLikes.page.posts.postLikes','pageLikes.page.posts.user'
+            
+        )->get()->find($userId); 
+        return $user;
+
     }
 
 

@@ -62,6 +62,7 @@ Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware('au
 Route::post('/users', [UserController::class,'store']);
 Route::post('/user/id', [UserController::class,'getUserId']);
 Route::post('/user/userid', [UserController::class,'getUserByUserId'])->middleware('auth:sanctum');
+Route::get('/dashboard/{user}',[UserController::class,'dashboard']);
 //Route::get('/showsave/{user}',[UserController::class,'showsave']);
 
 //post Routes

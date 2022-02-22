@@ -38,7 +38,8 @@ class PostController extends Controller
         $data = request()->all();
         $post = Post::create([
             'content' => $data['content'],
-            'user_id' => $data['user_id'],
+            'user_id' => isset($data['user_id'])? $data['user_id']: null,
+            'page_id' => isset($data['page_id'])? $data['page_id']: null,
             'hasPic' => false,
             // 'save_post'=>false,
         ]);

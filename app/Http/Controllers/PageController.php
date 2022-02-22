@@ -15,7 +15,7 @@ class PageController extends Controller
     }
 
     public function show($id){
-        $page = Page::with('user','pageslike','posts')->get()->find($id);
+        $page = Page::with('user','pageslike','posts.comments.user','posts.postLikes')->get()->find($id);
         return $page;
     }
 
