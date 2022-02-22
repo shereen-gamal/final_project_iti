@@ -78,7 +78,8 @@ class UserController extends Controller
             'posts.user',
             'posts.postLikes',
             'notifications.from_user',
-            'notifications.post'
+            'notifications.post',
+            'friend_requests.user'
         )->get()->find($userId); 
         return $user;
     }

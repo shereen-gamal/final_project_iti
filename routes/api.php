@@ -25,6 +25,7 @@ use App\Models\ChatLine;
 use App\Http\Controllers\ProfilePictureController;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
+use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\NotificationController;
 use App\Models\Notification;
@@ -172,3 +173,9 @@ Route::get('/shares',[shareController ::class,'index']);
 Route::get('/shares/{share}',[shareController::class,'show']);
 Route::post('/shares',[shareController ::class,'store']);
 Route::delete('/shares/{shares}',[shareController ::class ,'destory']);
+
+//friend request Routes
+Route::get('/friendrequests',[FriendRequestController::class,'index']);
+Route::get('/friendrequests/{friendrequest}',[FriendRequestController::class,'show']);
+Route::post('/friendrequests',[FriendRequestController::class,'store']);
+Route::delete('/friendrequests/{friendrequest}',[FriendRequestController::class,'destory']);
