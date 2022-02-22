@@ -23,4 +23,9 @@ class Page extends Model
     public function posts(){
         return $this->hasMany(Post::class,'page_id','id');
     }
+
+
+    public function pageslike(){
+        return $this->hasMany(PagesLike::class,'page_id','id');
+    }
 }

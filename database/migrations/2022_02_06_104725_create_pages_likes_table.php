@@ -19,6 +19,7 @@ class CreatePagesLikesTable extends Migration
             ->onUpdate('cascade');
             $table->foreignId('page_id')->constrained()->onDelete('cascade')
             ->onUpdate('cascade');
+
         });
     }
 

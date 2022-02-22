@@ -16,12 +16,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SavePostController;
 use App\Http\Controllers\shareController;
+use App\Http\Controllers\PagesLikeController;
 use App\Models\CommentLike;
 use App\Models\postLike;
 use App\Models\Friend;
 use Pusher\Pusher;
 use App\Models\Chat;
 use App\Models\ChatLine;
+use App\Models\PagesLike;
 use App\Http\Controllers\ProfilePictureController;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
@@ -123,6 +125,15 @@ Route::post('/pages',[PageController::class,'store']);
 Route::put('/pages/{page}',[PageController::class ,'update']);
 Route::delete('/pages/{page}',[PageController::class ,'destory']);
 
+
+//pageslike Routes
+
+Route::get('/pagelikes',[PagesLikeController::class,'index']);
+Route::get('/pagelikes/{like}',[PagesLikeController::class,'show']);
+Route::post('/pagelikes',[PagesLikeController::class,'store']);
+Route::put('/pagelikes/{like}',[PagesLikeController::class ,'update']);
+Route::delete('/pagelikes/{like}',[PagesLikeController::class ,'destroy']);
+
  //friend Routes
  Route::get('/friends',[FriendController::class,'index']);
  Route::post('/friends',[FriendController::class,'store']);
@@ -137,6 +148,8 @@ Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
 Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
+Route::post('/pagepicture/{id}',[FileController::class,'pagePicture']);
+Route::post('/pagecover/{id}',[FileController::class,'pageCover']);
 
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);
