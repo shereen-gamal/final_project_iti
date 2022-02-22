@@ -147,6 +147,8 @@ Route::post('/file',[FileController::class,'file']);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture']);
 Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
 Route::post('/coverpicture/{id}',[FileController::class,'coverPicture']);
+Route::post('/pagepicture/{id}',[FileController::class,'pagePicture']);
+Route::post('/pagecover/{id}',[FileController::class,'pageCover']);
 
 //chatline Routes
 Route::post('/chatlines',[ChatLineController::class ,'store']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Page;
 use App\Models\ProfilePicture;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -72,6 +73,38 @@ class FileController extends Controller
             //     'profilePic' => $compPic,
             // ]);
             $path = $request->file('image')->storeAs('public/covers',$compPic);
+        }
+    }
+
+    public function pagePicture(Request $request,$pageid){
+        $page = Page::
+        where('id', '=', $pageid)
+        ->first();
+        
+        if($request->hasFile('image')){
+            $completeFileName = $request->file('image')->getClientOriginalName();
+            $fileNameOnly = pathinfo($completeFileName,PATHINFO_FILENAME );
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $compPic = str_replace(' ','_',$fileNameOnly). '-' .rand(). '_' . time() . '.' . $extension;
+            $page->update(['profile_image' =>  $compPic]);
+            
+            $path = $request->file('image')->storeAs('public/pages',$compPic);
+        }
+    }
+
+    public function pageCover(Request $request,$pageid){
+        $page = Page::
+        where('id', '=', $pageid)
+        ->first();
+        
+        if($request->hasFile('imageCover')){
+            $completeFileName = $request->file('imageCover')->getClientOriginalName();
+            $fileNameOnly = pathinfo($completeFileName,PATHINFO_FILENAME );
+            $extension = $request->file('imageCover')->getClientOriginalExtension();
+            $compPic = str_replace(' ','_',$fileNameOnly). '-' .rand(). '_' . time() . '.' . $extension;
+            $page->update(['cover_image' =>  $compPic]);
+            
+            $path = $request->file('imageCover')->storeAs('public/pages/covers',$compPic);
         }
     }
 }
