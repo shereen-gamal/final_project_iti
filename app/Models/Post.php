@@ -32,12 +32,17 @@ class Post extends Model
     {
         return $this->hasMany(SavePost::class,'post_id','id' );
     }
+    public  function page()
+    {
+        return $this->belongsTo(Page::class);
+    }
     protected $fillable =[
         'content',
         'user_id',
         'postPic',
         'hasPic',
         'save_post',
+        'page_id'
     ];
 
     public function user(){
