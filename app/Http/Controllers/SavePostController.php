@@ -13,14 +13,14 @@ class SavePostController extends Controller
     
     public function index()
     {
-        $allsavedposts = Savepost::with('post.photos','post.comments.user','post.shares','post.postLikes','user','post')->get();
+        $allsavedposts = Savepost::with('post.photos','post.comments.user','post.shares','post.postLikes','user','post','post.user')->get();
         return $allsavedposts ;
     }
 
 
     public function show($savedpostId)
     {
-        $savedpost =Savepost::with('post.photos','post.comments.user','post.shares','post.postLikes','user','post')->get()->where('id',$savedpostId);
+        $savedpost =Savepost::with('post.photos','post.comments.user','post.shares','post.postLikes','user','post','post.user')->get()->where('id',$savedpostId);
         return  $savedpost;
     }
 
@@ -30,7 +30,6 @@ class SavePostController extends Controller
             [
             'post_id'=>$data['post_id'],
             'user_id'=>$data['user_id'],
-
         ]);
         return $savedpost;
     }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\SavePost;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -62,13 +63,20 @@ class UserController extends Controller
     $allusers = user::with('posts','friends','friend','groups','pageLikes',
     'chatLines.toUser',
     'chatLines.chat.messages',
-    'pages')->get();
+    'pages','savePost')->get();
     return $allusers;
     }
     public function show($userId)
     {
         $user =User::with(
             'posts.comments.user',
+            'savePost',
+            'savePost.user'
+            ,'savePost.post',
+            'savePost.post.photos',
+            'savePost.post.comments.user',
+            'savePost.post.shares',
+            'savePost.post.postLikes',
             'friends.posts',
             'friend.posts',
             'pageLikes.page.posts',
@@ -80,6 +88,7 @@ class UserController extends Controller
             'notifications.from_user',
             'notifications.post',
             'friend_requests.user'
+
         )->get()->find($userId); 
         return $user;
     }
