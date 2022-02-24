@@ -33,7 +33,8 @@ class User extends Authenticatable
         'userid',
         'intro',
         'coverPic',
-        'hasCover'
+        'hasCover',
+        'permission'
     ];
 
     //many to many self relation
