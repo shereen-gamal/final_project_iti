@@ -71,7 +71,7 @@ class User extends Authenticatable
     }
     public  function savePost()
     {
-        return $this->hasMany(SavePost::class,'post_id','id' );
+        return $this->hasMany(SavePost::class,'user_id','id' );
     }
     public function notifications(){
         return $this->hasMany(Notification::class,'to_user_id','id');
