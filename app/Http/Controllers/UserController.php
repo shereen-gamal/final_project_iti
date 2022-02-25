@@ -35,6 +35,9 @@ class UserController extends Controller
     {
         $data = $request->all();
         $oneUser = User::findOrFail($UserId);
+        $permission = $oneUser->permission;
+        $isAdmin = $oneUser->isAdmin;
+        $reported = $oneUser->is_reported;
         $oneUser->update([
             'email' => (isset($data['email']))? $data['email']: $oneUser->email,
             'firstname' => isset($data['firstname'])? $data['firstname']: $oneUser->firstname,
@@ -45,6 +48,9 @@ class UserController extends Controller
             'mobile' => isset($data['mobile'])? $data['mobile']: $oneUser->mobile,
             'location' => isset($data['location'])? $data['location']: $oneUser->location,
             'intro' => isset($data['intro'])? $data['intro']: $oneUser->intro,
+            'is_reported'=> isset($data['is_reported'])? $data['is_reported']:$reported,
+            'isAdmin'=>isset($data['isAdmin'])? $data['isAdmin']:$isAdmin,
+            'permission'=>isset($data['permission'])? $data['permission']:$permission,
 
 
         ]);
@@ -66,6 +72,26 @@ class UserController extends Controller
     'pages','savePost')->get();
     return $allusers;
     }
+
+    public function admins(){
+        $admins = user::with('posts','friends','friend','groups','pageLikes',
+        'chatLines.toUser',
+        'chatLines.chat.messages',
+        'pages','savePost')->where('isAdmin',true)->where('permission',2)->get();
+    return $admins;
+
+    }
+
+    public function reports(){
+        $admins = user::with('posts','friends','friend','groups','pageLikes',
+        'chatLines.toUser',
+        'chatLines.chat.messages',
+        'pages','savePost')->where('is_reported',true)->get();
+    return $admins;
+
+    }
+
+    
     public function show($userId)
     {
         $user =User::with(
