@@ -14,6 +14,7 @@ class Page extends Model
         'page_name',
         'user_id',
         'about',
+        'is_reported',
     ];
 
     public function user(){

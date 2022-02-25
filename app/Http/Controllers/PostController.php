@@ -14,7 +14,7 @@ class PostController extends Controller
     {
         $allposts = Post::with('photos','comments.user','shares','postLikes','user.friends','user.friend')->get();
         //    $allposts=Post::all();
-        return PostResource::collection($allposts);    
+        return $allposts;    
     }
 
     public function show($postId)

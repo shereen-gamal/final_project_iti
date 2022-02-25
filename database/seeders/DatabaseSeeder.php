@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         //create one super admin for this system 
         User::create([
              'email' => 'superadmin@mail.com',
-             'password' =>Hash::make('Super_admin@app'),
+             'password' =>Hash::make('Super_admin@app0'),
              'firstname' => 'Ahmed',
              'lasttname' => 'Helmy',
              'date_of_birth' =>'1990-01-01',
