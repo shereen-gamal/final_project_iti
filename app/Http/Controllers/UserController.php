@@ -51,6 +51,7 @@ class UserController extends Controller
             'is_reported'=> isset($data['is_reported'])? $data['is_reported']:$reported,
             'isAdmin'=>isset($data['isAdmin'])? $data['isAdmin']:$isAdmin,
             'permission'=>isset($data['permission'])? $data['permission']:$permission,
+            'is_banned'=> isset($data['is_banned'])? $data['is_banned']:$oneUser->is_banned,
 
 
         ]);

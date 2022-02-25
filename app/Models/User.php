@@ -35,7 +35,8 @@ class User extends Authenticatable
         'coverPic',
         'hasCover',
         'permission',
-        'is_reported'
+        'is_reported',
+        'is_banned',
     ];
 
     //many to many self relation
