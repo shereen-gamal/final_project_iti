@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/user/token', [UserController::class,'Login']);/****************token_aPi******/
 Route::put('/users/{user}',[UserController::class, 'update']);
 Route::get('/users',[UserController::class,'index']);
-Route::get('/users/{user}',[UserController::class,'show']);
+Route::get('/users/{user}',[UserController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);;
 Route::get('/search/{user}',[UserController::class,'search'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::delete('/users/{user}',[Usercontroller::class,'destroy'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/users', [UserController::class,'store']);
@@ -68,9 +68,9 @@ Route::get('/dashboard/{user}',[UserController::class,'dashboard'])->middleware(
 //post Routes
 Route::get('/posts',[postController::class,'index'])->name('APi'.' api.posts.index');
 Route::get('/posts/{post}',[postController::class,'show']);
-Route::post('/posts',[PostController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::put('/posts/{post}',[PostController::class,'update'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/posts',[PostController::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::put('/posts/{post}',[PostController::class,'update'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 //Route::put('/savepost/{post}',[PostController::class,'savepost']);
 //Route::put('/deletesave/{post}',[PostController::class,'deletesave']);
 //Route::get('/showsave',[PostController::class,'showsave'])->middleware('auth:sanctum');
@@ -78,9 +78,9 @@ Route::delete('/posts/{post}',[PostController::class,'destory'])->middleware(['a
 //comment Routes
 Route::get('/comments',[CommentController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/comments/{comment}',[CommentController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/comments',[CommentController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::put('/comments/{comment}',[CommentController::class ,'update'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/comments/{comment}',[CommentController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/comments',[CommentController::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::put('/comments/{comment}',[CommentController::class ,'update'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/comments/{comment}',[CommentController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 //photo Routes
 Route::get('/photos',[PhotoController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/photos/{photo}',[PhotoController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
@@ -90,14 +90,14 @@ Route::delete('/photos/{photo}',[PhotoController::class ,'destory'])->middleware
 //group Routes
 Route::get('/groups',[GroupController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/groups/{group}',[GroupController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/groups',[GroupController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::put('/groups/{group}',[GroupController::class ,'update'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/groups/{group}',[GroupController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/groups',[GroupController::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::put('/groups/{group}',[GroupController::class ,'update'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/groups/{group}',[GroupController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 //commentslike Routes
 Route::get('/commentslike',[CommentLikeController ::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/commentslike/{comment}',[CommentLikeController ::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/commentslike',[CommentLikeController ::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/commentslike',[CommentLikeController ::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/commentslike/{comment}',[CommentLikeController ::class ,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 
 //savepostslike Routes
 Route::get('/saveposts',[SavePostController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
@@ -107,8 +107,8 @@ Route::put('/saveposts/{savepost}',[SavePostController::class ,'update'])->middl
 Route::delete('/saveposts/{savepost}',[SavePostController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
 //postLike
 Route::get('/postslikes',[postLikeController ::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/postslikes',[postLikeController ::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/postslikes/{postslike}',[postLikeController ::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/postslikes',[postLikeController ::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/postslikes/{postslike}',[postLikeController ::class ,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 //chat Routes
 Route::get('/chats',[ChatController ::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/chats/{chat}',[ChatController ::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
@@ -122,9 +122,9 @@ Route::delete('/messages/{message}',[MessageController ::class ,'destory'])->mid
 //pages Routes
 Route::get('/pages',[PageController::class,'index']);
 Route::get('/pages/{page}',[PageController::class,'show']);
-Route::post('/pages',[PageController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::put('/pages/{page}',[PageController::class ,'update'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::delete('/pages/{page}',[PageController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/pages',[PageController::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::put('/pages/{page}',[PageController::class ,'update'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
+Route::delete('/pages/{page}',[PageController::class ,'destory'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 
 
 //pageslike Routes
