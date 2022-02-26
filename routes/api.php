@@ -27,6 +27,7 @@ use App\Models\PagesLike;
 use App\Http\Controllers\ProfilePictureController;
 use App\Events\MessageEvent;
 use App\Http\Controllers\ChatLineController;
+use App\Http\Controllers\CoverPictureController;
 use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\NotificationController;
@@ -163,6 +164,8 @@ Route::delete('/friendship/{friend}',[FriendshipController::class,'unfriend'])->
 Route::get('/profilepics',[ProfilePictureController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/profilepics',[ProfilePictureController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
+//cover pictures Routes
+Route::get('/coverpics',[CoverPictureController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 
 //notification Routes
 Route::get('/notifications',[NotificationController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);

@@ -52,6 +52,8 @@ class UserController extends Controller
             'isAdmin'=>isset($data['isAdmin'])? $data['isAdmin']:$isAdmin,
             'permission'=>isset($data['permission'])? $data['permission']:$permission,
             'is_banned'=> isset($data['is_banned'])? $data['is_banned']:$oneUser->is_banned,
+            'profilePic'=> isset($data['profilePic'])? $data['profilePic']:$oneUser->profilePic,
+            'coverPic'=> isset($data['coverPic'])? $data['coverPic']:$oneUser->coverPic,
 
 
         ]);
