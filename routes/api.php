@@ -170,7 +170,7 @@ Route::get('/coverpics',[CoverPictureController::class,'index'])->middleware(['a
 //notification Routes
 Route::get('/notifications',[NotificationController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/notifications/{notification}',[NotificationController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/notifications',[NotificationController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/notifications',[NotificationController::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 Route::delete('/notifications/{notification}',[NotificationController::class,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
 
 //pusher api 
@@ -188,7 +188,7 @@ Route::post('/pusher/auth',function(Request $request){
 //shares
 Route::get('/shares',[shareController ::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/shares/{share}',[shareController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/shares',[shareController ::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/shares',[shareController ::class,'store'])->middleware(['auth:sanctum',"checkStatus","checkban"]);
 Route::delete('/shares/{shares}',[shareController ::class ,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
 
 //friend request Routes
