@@ -46,6 +46,8 @@ class UserController extends Controller
             // 'password' => Hash::make($data['password']),
             'date_of_birth' => isset($data['date_of_birth'])? $data['date_of_birth']: $oneUser->date_of_birth,
             'mobile' => isset($data['mobile'])? $data['mobile']: $oneUser->mobile,
+            'school'=> isset($data['school'])? $data['school']: $oneUser->school,
+
             'location' => isset($data['location'])? $data['location']: $oneUser->location,
             'intro' => isset($data['intro'])? $data['intro']: $oneUser->intro,
             'is_reported'=> isset($data['is_reported'])? $data['is_reported']:$reported,
@@ -157,10 +159,10 @@ class UserController extends Controller
             'userid' => uniqid(),
             'name' => $data['firstname'] . " " . $data['lastname'],
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
-            'school' => isset($data['school']) ? $data['school'] :'cairo school',
+            'school' => isset($data['school']) ? $data['school'] :'NULL',
             'address' => isset($data['address']) ? $data['address'] :'my address',
             'profilePic' => 'default.jpg',
-            'mobile' => '01234567891',
+            'mobile' => 'NULL',
             'hasCover' => false,
             'intro' => 'Hello there! Welcome to my Profile.'
         ]);
