@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Page;
 use App\Models\ProfilePicture;
+use App\Models\CoverPicture;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -68,10 +69,10 @@ class FileController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $compPic = str_replace(' ','_',$fileNameOnly). '-' .rand(). '_' . time() . '.' . $extension;
             $user->update(['coverPic' =>  $compPic, 'hasCover' => true]);
-            // $profilepic = ProfilePicture::create([
-            //     'user_id' => $userid,
-            //     'profilePic' => $compPic,
-            // ]);
+            $coverpic = CoverPicture::create([
+                'user_id' => $userid,
+                'coverPic' => $compPic,
+            ]);
             $path = $request->file('image')->storeAs('public/covers',$compPic);
         }
     }

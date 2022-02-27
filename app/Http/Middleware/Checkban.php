@@ -24,7 +24,7 @@ class Checkban
             return $next($request);
         }
         else{
-            return "is_ban";
+            return abort(403, 'Forbidden, you are banned!');
         }
     }
 }
