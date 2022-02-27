@@ -198,3 +198,4 @@ Route::delete('/friendrequests/{friendrequest}',[FriendRequestController::class,
 //get all admin in system
 Route::get('/admins',[UserController::class,'admins']);
 Route::get('/reportedUsers',[UserController::class,'reports']);
+Route::get('/normal',[UserController::class,'normal']);

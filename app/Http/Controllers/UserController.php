@@ -83,6 +83,15 @@ class UserController extends Controller
 
     }
 
+    public function normal(){
+        $normal = user::with('posts','friends','friend','groups','pageLikes',
+        'chatLines.toUser',
+        'chatLines.chat.messages',
+        'pages','savePost')->where('isAdmin',false)->get();
+    return $normal ;
+
+    }
+
     public function reports(){
         $admins = user::with('posts','friends','friend','groups','pageLikes',
         'chatLines.toUser',
