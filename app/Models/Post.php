@@ -42,7 +42,8 @@ class Post extends Model
         'postPic',
         'hasPic',
         'save_post',
-        'page_id'
+        'page_id',
+        'is_reported'
     ];
 
     public function user(){
