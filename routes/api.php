@@ -148,7 +148,7 @@ Route::post('/send-message',function(Request $data){
 //For Uploading a file
 Route::post('/file',[FileController::class,'file'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/profilepicture/{id}',[FileController::class,'profilePicture'])->middleware(['auth:sanctum',"checkStatus"]);
-Route::post('/postpicture/{id}',[FileController::class,'postPicture'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::post('/postpicture/{id}',[FileController::class,'postPicture']);
 Route::post('/coverpicture/{id}',[FileController::class,'coverPicture'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/pagepicture/{id}',[FileController::class,'pagePicture'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/pagecover/{id}',[FileController::class,'pageCover'])->middleware(['auth:sanctum',"checkStatus"]);
