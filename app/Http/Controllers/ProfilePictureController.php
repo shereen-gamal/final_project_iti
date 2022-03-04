@@ -27,4 +27,11 @@ class ProfilePictureController extends Controller
         ]);
         return $photo ;
     }
+
+    public function destory($id){
+        $photo =ProfilePicture::findOrFail($id);
+        $photo->delete();
+        return $photo;
+    }
+
 }
