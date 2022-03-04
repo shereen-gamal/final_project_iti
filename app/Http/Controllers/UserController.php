@@ -173,7 +173,7 @@ class UserController extends Controller
             'isAdmin' => isset($data['isAdmin']) ? $data['isAdmin'] : False,
             'school' => isset($data['school']) ? $data['school'] :'NULL',
             'address' => isset($data['address']) ? $data['address'] :'my address',
-            'profilePic' => 'default.jpg',
+            'profilePic' => isset($data['profilePic']) ? $data['profilePic'] :'default.jpg',
             'mobile' => 'NULL',
             'hasCover' => false,
             'intro' => 'Hello there! Welcome to my Profile.'
