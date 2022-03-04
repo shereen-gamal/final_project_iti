@@ -117,6 +117,7 @@ class UserController extends Controller
             'savePost.post.comments.user',
             'savePost.post.shares',
             'savePost.post.postLikes',
+            'savePost.post.user',
             'friends.posts',
             'friend.posts',
             'pageLikes.page.posts',
