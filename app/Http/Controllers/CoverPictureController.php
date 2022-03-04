@@ -27,4 +27,12 @@ class CoverPictureController extends Controller
         ]);
         return $photo ;
     }
+
+
+
+    public function destory($id){
+        $photo =CoverPicture::findOrFail($id);
+        $photo->delete();
+        return $photo;
+    }
 }

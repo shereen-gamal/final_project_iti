@@ -163,9 +163,11 @@ Route::delete('/friendship/{friend}',[FriendshipController::class,'unfriend'])->
 //profile pictures Routes
 Route::get('/profilepics',[ProfilePictureController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::get('/profilepics/{profilepic}',[ProfilePictureController::class,'show'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::delete('/profilepics/{profilepic}',[ProfilePictureController::class,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
 Route::post('/profilepics',[ProfilePictureController::class,'store'])->middleware(['auth:sanctum',"checkStatus"]);
 //cover pictures Routes
 Route::get('/coverpics',[CoverPictureController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
+Route::delete('/coverpics/{coverpic}',[CoverPictureController::class,'destory'])->middleware(['auth:sanctum',"checkStatus"]);
 
 //notification Routes
 Route::get('/notifications',[NotificationController::class,'index'])->middleware(['auth:sanctum',"checkStatus"]);
